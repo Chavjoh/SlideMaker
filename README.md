@@ -6,7 +6,7 @@ Introduction
 
 Avec l'avènement du standard HTML5, de nombreuses options sont désormais offertes aux développeurs web, parmi lesquelles la création de présentations structurées en diapositives. Auparavant, ce type de présentation était le plus souvent réalisé avec Powerpoint ou des équivalents. Désormais, différents frameworks tels que Reveal permettent de réaliser des présentations intuitives, efficientes et élégantes.
 
-Cependant, la préparation de telles présentations demande une bonne connaissance du langage HTML, et n'est pas toujours très aisée, notamment pour les éléments qui se répètent (titres de chapitres, pieds de pages, etc.). La mise au point d'un langage descriptif et d'un compilateur permettant de générer des slides HTML5 à partir de ce langage est proposée dans le cadre du cours "Compilateurs" dispensé au sein de la Haute Ecole Arc.
+Cependant, la préparation de telles présentations demande une bonne connaissance du langage HTML, et n'est pas toujours très aisée, notamment pour les éléments qui se répètent (titres de chapitres, pieds de pages, etc.). La mise au point d'un langage descriptif et d'un compilateur permettant de générer des slides HTML5 à partir de ce langage est proposée dans le cadre du cours "Compilateurs" dispensé au sein de la <a href="http://www.he-arc.ch">Haute Ecole Arc</a>
 
 Objectifs
 ---------
@@ -26,6 +26,22 @@ Le langage doit permettre de décrire intégralement une présentation en décla
 
 Le compilateur associé doit prendre en entrée un fichier écrit dans ce langage source, et fournir en sortie un fichier HTML fonctionnel, prêt à être intégré et lu dans le framework Reveal.
 
+## Requis
+
+* Python 3.3
+* PLY 3.4 (Python Lex-Yacc)
+* PyDot 1.0.3
+* PyParsing 1.5.5
+* Graphviz 2.3
+
+## Documentation
+
+* <a href="https://github.com/Chavjoh/SlideMaker/wiki">A propos du projet</a> 
+* <a href="http://www.python.org/">A propos de python</a>
+* <a href="http://www.dabeaz.com/ply/">A propos de PLY</a>
+* <a href="https://code.google.com/p/pydot/">A propos de PyDot</a>
+* <a href="http://pyparsing.wikispaces.com/">A propos de PyParsing</a>
+* <a href="http://www.graphviz.org/">A propos de Graphviz</a>
 
 Exemple
 -------
@@ -50,7 +66,7 @@ Group("Titre de la section", "background: #00ff00")
 					RichText()
 					{
 						Element("Elé", "color: #ff0000");
-						Element("ment ", "color: #00ff00, decoration: 							underline");
+						Element("ment ", "color: #00ff00, decoration: underline");
 						Element("3", "color: #0000ff");
 					}
 					Text("Elément 3");

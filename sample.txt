@@ -1,0 +1,38 @@
+Group("Titre de la section", "background: #00ff00")
+{
+	// Ceci est un commentaire
+	Slide("background: #ff0000")
+	{
+		VerticalBox(20)
+		{
+			Title("Mon titre");
+			HorizontalBox(20)
+			{
+				Image("image.png");
+				List("unordered")
+				{
+					Text("Elément 1");
+					RichText()
+					{
+						Element("Elé", "color: #ff0000");
+						Element("ment ", "color: #00ff00, decoration: underline");
+						Element("2", "color: #0000ff");
+					}
+					Text("Elément; 3");
+				}
+			}
+		}
+	}
+
+	/*
+	 * Ceci est un commentaire sur plusieurs lignes
+	 * Et ci-dessous une boucle génératrice de slides multiples
+	 */
+	For (i, 1, 5)
+	{
+		Slide()
+		{
+			Image("img" + i + ".png");
+		}
+	}
+}

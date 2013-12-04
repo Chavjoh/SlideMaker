@@ -73,11 +73,11 @@ def t_FOR(t):
 
 def t_COMMENTSINGLE(t):
 	r'//.*'
-	return t
+	pass
 
 def t_COMMENTMULTI(t):
 	r'/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/'
-	return t
+	pass
 
 def t_PLUS(t):
 	r'[+]'

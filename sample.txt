@@ -1,21 +1,54 @@
 Group("Titre de la section", "background: #00ff00")
 {
 	// Ceci est un commentaire
-	Slide("background: #ff0000")
+	Slide("transition: linear, background: #abcdef")
 	{
 		VerticalBox(20)
 		{
-			Title("Mon titre");
-			HorizontalBox(20)
+			Title("Mon titre autre");
+			RichText()
 			{
-				Image("image.png");
+				Element("Elé", "color: #ff0000");
+				Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
+				Element("2", "color: #0000ff");
+			}
+			HorizontalBox(30)
+			{
 				List("unordered")
 				{
 					Text("Elément 1");
 					RichText()
 					{
 						Element("Elé", "color: #ff0000");
-						Element("ment ", "color: #00ff00, decoration: underline");
+						Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
+						Element("2", "color: #0000ff");
+					}
+					Text("Elément; 3");
+				}
+			}
+		}
+	}
+	// Ceci est un commentaire
+	Slide("transition: linear, background: #abcdef")
+	{
+		VerticalBox(20)
+		{
+			Title("Mon titre autre");
+			RichText()
+			{
+				Element("Elé", "color: #ff0000");
+				Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
+				Element("2", "color: #0000ff");
+			}
+			HorizontalBox(30)
+			{
+				List("unordered")
+				{
+					Text("Elément 1");
+					RichText()
+					{
+						Element("Elé", "color: #ff0000");
+						Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
 						Element("2", "color: #0000ff");
 					}
 					Text("Elément; 3");

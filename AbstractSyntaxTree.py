@@ -138,9 +138,6 @@ class IdentifierNode(Node):
 class ForNode(Node):
 	type = 'For'
 
-class PlusNode(Node):
-	type = '+'
-
 class ParamsNode(Node):
 	type = 'Params'
         

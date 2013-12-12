@@ -1,0 +1,58 @@
+
+program ::= (group | slideGroup)+
+
+	group ::= 'Group(' title (',' style)? ')' '{' slideGroup '}'
+
+		title ::= STRING
+
+		style ::= STRING
+
+	slideGroup ::= (slide | slideFor)+
+
+		slideFor ::= 'For (' identifier ',' begin ',' end ')' '{' slideGroup '}'
+
+			identifier ::= STRING
+
+			begin ::= NUMBER
+
+			end ::= NUMBER
+
+
+		slide ::= 'Slide(' style ')' '{' contentGroup '}'
+
+
+complexString ::= STRING ('+' STRING)* | IDENTIFIER
+
+contentGroup ::= (title | box | image | content | list | contentFor)*
+
+	title ::= 'Title(' complexString ')' ';'
+
+	box ::= horizontalBox | verticalBox
+
+		verticalBox ::= 'VerticalBox(' padding ')' '{' contentGroup '}'
+
+		horizontalBox ::= 'HorizontalBox(' padding ')' '{' contentGroup '}'
+
+			padding ::= NUMBER
+
+	image ::= 'Image(' complexString ')' ';'
+
+	content ::= text | richText
+
+		text ::= 'Text(' complexString ')' ';'
+
+			richText ::= 'RichText(' ')' '{' richTextGroup '}'
+
+				richTextGroup ::= ('Element(' complexString (',' style)? ')' ';')+
+
+	list ::= 'List(' orderType ')' '{' contentList '}'
+
+		contentList ::= contentGroup+
+
+		orderType ::= 'Order' | 'Unorder'
+
+	contentFor ::= 'For (' identifier ',' begin ',' end ')' '{' content '}'
+
+
+
+

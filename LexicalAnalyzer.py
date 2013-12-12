@@ -17,8 +17,6 @@ tokens = (
 	'ELEMENT',
 	'IMAGE',
 	'LIST',
-	'COMMENTSINGLE',
-	'COMMENTMULTI',
 	'PLUS',
 	'NUMBER',
 	'STRING',

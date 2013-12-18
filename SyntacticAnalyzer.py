@@ -70,7 +70,8 @@ def p_content(p):
 		| image
 		| contenttext
 		| list
-		| contentfor '''
+		| contentfor
+		| table '''
 	p[0] = p[1]
 
 def p_contenttext(p):
@@ -130,6 +131,14 @@ def p_element(p):
 def p_list(p):
 	''' list : LIST '(' STRING ')' '{' textlist '}' '''
 	p[0] = AST.ListNode([AST.StringNode(p[3])] + p[6])
+
+def p_table(p):
+	''' table : TABLE '(' STRING ',' STRING ')' ';'
+		| TABLE '(' STRING ')' ';' '''
+	if len(p) < 8:
+		p[0] = AST.TableNode([AST.StringNode(p[3])])
+	else:
+		p[0] = AST.TableNode([AST.StringNode(p[3]), AST.StringNode(p[5])])
 
 def p_textlist(p):
 	''' textlist : contenttext '''

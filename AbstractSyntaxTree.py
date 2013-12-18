@@ -170,6 +170,9 @@ class PrintNode(Node):
     
 class WhileNode(Node):
     type = 'while'
+
+class TableNode(Node):
+	type = 'table'
     
 class EntryNode(Node):
     type = 'ENTRY'

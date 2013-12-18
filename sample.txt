@@ -72,4 +72,9 @@ Group("Titre de la section", "background: #00ff00")
 			Image("truc" + i + ".png");
 		}
 	}
+
+	Slide()
+	{
+		Table("data.csv", "col-start:3, col-count:4, row-start:2, row-count:6");
+	}
 }

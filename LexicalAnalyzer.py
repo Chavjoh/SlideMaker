@@ -18,6 +18,7 @@ tokens = (
 	'ELEMENT',
 	'IMAGE',
 	'LIST',
+	'TABLE',
 	'PLUS',
 	'NUMBER',
 	'STRING',
@@ -64,6 +65,10 @@ def t_IMAGE(t):
 
 def t_LIST(t):
 	r'List'
+	return t
+
+def t_TABLE(t):
+	r'Table'
 	return t
 
 def t_FOR(t):

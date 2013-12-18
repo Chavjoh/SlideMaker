@@ -1,5 +1,6 @@
 #-*-coding:utf8-*-
 
+import csv
 import AbstractSyntaxTree as AST
 from AbstractSyntaxTree import addToClass
 
@@ -241,6 +242,63 @@ def assemble(self):
 @addToClass(AST.ParamsNode)
 def assemble(self):
 	return self.children
+
+######################################################################
+#                               TableNode                            #
+######################################################################
+def caseSlideStyleBackground(p, node):
+	node.html += " data-background=\"" + p + "\""
+
+def caseSlideStyleTransition(p, node):
+	node.html += " data-transition=\"" + p + "\""
+
+def caseTableParamColStart(p, node):
+	node.col_start = int(p)
+
+def caseTableParamColCount(p, node):
+	node.col_count = int(p)
+
+def caseTableParamRowStart(p, node):
+	node.row_start = int(p)
+
+def caseTableParamRowCount(p, node):
+	node.row_count = int(p)
+
+switchTableParams = {
+	'col-start': caseTableParamColStart,
+	'col-count': caseTableParamColCount,
+	'row-start': caseTableParamRowStart,
+	'row-count': caseTableParamRowCount,
+}
+
+@addToClass(AST.TableNode)
+def assemble(self):
+	self.html = ""
+	with open(self.children[0].assemble()) as csvfile:
+		csvcontent = csv.reader(csvfile, delimiter=';')
+		self.table = []
+		for row in csvcontent:
+			self.table.append([])
+			for cell in row:
+				self.table[len(self.table)-1].append(cell)
+		self.col_start = 1
+		self.row_start = 1
+		self.row_count = len(self.table)
+		self.col_count = 0
+		if self.row_count != 0:
+			self.col_count = len(self.table[0])
+		if len(self.children) > 1:
+			params = dict(item.split(":") for item in self.children[1].assemble().split(','))
+			for key in params.keys():
+				switchTableParams[key.strip()](params[key].strip(), self)
+		self.html += "<table>\n"
+		for row in self.table[self.row_start-1:self.row_start-1+self.row_count]:
+			self.html += "<tr>\n"
+			for cell in row[self.col_start-1:self.col_start-1+self.col_count]:
+				self.html += "<td>" + cell + "</td>\n"
+			self.html += "</tr>\n"
+		self.html += "</table>\n"
+	return self.html
 
 if __name__ == "__main__":
 	from SyntacticAnalyzer import parse

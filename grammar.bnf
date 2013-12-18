@@ -1,9 +1,9 @@
 
 program ::= (group | slideGroup)+
 
-	group ::= 'Group(' title (',' style)? ')' '{' slideGroup '}'
+	group ::= 'Group(' titleGroup (',' style)? ')' '{' slideGroup '}'
 
-		title ::= STRING
+		titleGroup ::= STRING
 
 		style ::= STRING
 

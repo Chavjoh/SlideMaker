@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import ply.yacc as yacc
 
 from LexicalAnalyzer import tokens

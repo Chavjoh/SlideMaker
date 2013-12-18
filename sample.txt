@@ -8,7 +8,7 @@ Group("Titre de la section", "background: #00ff00")
 			Title("Mon titre autre");
 			RichText()
 			{
-				Element("Elé", "color: #ff0000");
+				Element("ElÃ©", "color: #ff0000");
 				Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
 				Element("2", "color: #0000ff");
 			}
@@ -16,14 +16,14 @@ Group("Titre de la section", "background: #00ff00")
 			{
 				List("unordered")
 				{
-					Text("Elément 1");
+					Text("ElÃ©ment 1");
 					RichText()
 					{
-						Element("Elé", "color: #ff0000");
+						Element("ElÃ©", "color: #ff0000");
 						Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
 						Element("2", "color: #0000ff");
 					}
-					Text("Elément; 3");
+					Text("ElÃ©ment; 3");
 				}
 			}
 		}
@@ -36,7 +36,7 @@ Group("Titre de la section", "background: #00ff00")
 			Title("Mon titre autre");
 			RichText()
 			{
-				Element("Elé", "color: #ff0000");
+				Element("ElÃ©", "color: #ff0000");
 				Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
 				Element("2", "color: #0000ff");
 			}
@@ -44,14 +44,14 @@ Group("Titre de la section", "background: #00ff00")
 			{
 				List("unordered")
 				{
-					Text("Elément 1");
+					Text("ElÃ©ment 1");
 					RichText()
 					{
-						Element("Elé", "color: #ff0000");
+						Element("ElÃ©", "color: #ff0000");
 						Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
 						Element("2", "color: #0000ff");
 					}
-					Text("Elément; 3");
+					Text("ElÃ©ment; 3");
 				}
 			}
 		}
@@ -59,13 +59,17 @@ Group("Titre de la section", "background: #00ff00")
 
 	/*
 	 * Ceci est un commentaire sur plusieurs lignes
-	 * Et ci-dessous une boucle génératrice de slides multiples
+	 * Et ci-dessous une boucle gÃ©nÃ©ratrice de slides multiples
 	 */
 	For (i, 1, 5)
 	{
 		Slide()
 		{
 			Image("img" + i + ".png");
+		}
+		Slide()
+		{
+			Image("truc" + i + ".png");
 		}
 	}
 }

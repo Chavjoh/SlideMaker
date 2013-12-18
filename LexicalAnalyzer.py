@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import ply.lex as lex
+import codecs
 
 reserved_words = (
 	'For',
@@ -105,7 +106,7 @@ def t_newline(t):
 t_ignore = ' \t'
 
 def t_error(t):
-	print("Illegal character '%s'" % repr(t.value[0]))
+	print("Illegal character ", repr(t.value[0]), " at line ", repr(t.lexer.lineno))
 	t.lexer.skip(1)
 
 lex.lex()
@@ -113,7 +114,7 @@ lex.lex()
 if __name__ == "__main__":
 	import sys
 
-	prog = open(sys.argv[1]).read()
+	prog = codecs.open(sys.argv[1], encoding='utf-8').read()
 
 	lex.input(prog)
 

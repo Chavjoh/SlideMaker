@@ -1,5 +1,9 @@
+#-*-coding:utf8-*-
+
 import AbstractSyntaxTree as AST
 from AbstractSyntaxTree import addToClass
+
+vars = {}
 
 ######################################################################
 #                              ProgramNode                           #
@@ -207,14 +211,29 @@ def assemble(self):
 ######################################################################
 @addToClass(AST.IdentifierNode)
 def assemble(self):
-	return 'IDENTIFIER'
+	global vars
+	self.html = ""
+	if str(self.tok) not in vars.keys():
+		print ("Identifier ", self.tok, " undefined")
+		exit(-1)
+	self.html += str(vars[str(self.tok)])
+	return self.html
 
 ######################################################################
 #                                ForNode                             #
 ######################################################################
 @addToClass(AST.ForNode)
 def assemble(self):
-	return ''
+	global vars
+	self.html = ""
+	if str(self.children[0].tok) in vars.keys():
+		print("Identifier ", self.children[0].tok, " already defined")
+		exit(-1)
+	for i in range(int(self.children[1].assemble()), int(self.children[2].assemble()) + 1):
+		vars[str(self.children[0].tok)] = i
+		for c in self.children[3:]:
+			self.html += c.assemble()
+	return self.html
 
 ######################################################################
 #                               ParamsNode                           #

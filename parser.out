@@ -1,10 +1,5 @@
 Created by PLY version 3.4 (http://www.dabeaz.com/ply)
 
-Unused terminals:
-
-    COMMENTSINGLE
-    COMMENTMULTI
-
 Grammar
 
 Rule 0     S' -> program
@@ -60,8 +55,6 @@ Terminals, with rules where they appear
 )                    : 5 15 26 27 28 31 32 33 34 35 38 39
 ,                    : 7 26 26 27 27 38
 ;                    : 28 33 34 38
-COMMENTMULTI         : 
-COMMENTSINGLE        : 
 ELEMENT              : 38
 FOR                  : 26 27
 GROUP                : 5
@@ -121,31 +114,44 @@ state 0
     (5) group -> . GROUP ( params ) { slidegroup }
     (15) slide -> . SLIDE ( params ) { contentgroup }
 
-    GROUP           shift and go to state 1
-    SLIDE           shift and go to state 5
+    GROUP           shift and go to state 4
+    SLIDE           shift and go to state 3
 
-    group                          shift and go to state 6
-    slide                          shift and go to state 2
-    statement                      shift and go to state 3
-    program                        shift and go to state 4
+    program                        shift and go to state 2
+    group                          shift and go to state 1
+    statement                      shift and go to state 5
+    slide                          shift and go to state 6
 
 state 1
 
-    (5) group -> GROUP . ( params ) { slidegroup }
+    (3) statement -> group .
 
-    (               shift and go to state 7
+    GROUP           reduce using rule 3 (statement -> group .)
+    SLIDE           reduce using rule 3 (statement -> group .)
+    $end            reduce using rule 3 (statement -> group .)
 
 
 state 2
 
-    (4) statement -> slide .
+    (0) S' -> program .
 
-    GROUP           reduce using rule 4 (statement -> slide .)
-    SLIDE           reduce using rule 4 (statement -> slide .)
-    $end            reduce using rule 4 (statement -> slide .)
 
 
 state 3
+
+    (15) slide -> SLIDE . ( params ) { contentgroup }
+
+    (               shift and go to state 7
+
+
+state 4
+
+    (5) group -> GROUP . ( params ) { slidegroup }
+
+    (               shift and go to state 8
+
+
+state 5
 
     (1) program -> statement .
     (2) program -> statement . program
@@ -157,60 +163,24 @@ state 3
     (15) slide -> . SLIDE ( params ) { contentgroup }
 
     $end            reduce using rule 1 (program -> statement .)
-    GROUP           shift and go to state 1
-    SLIDE           shift and go to state 5
+    GROUP           shift and go to state 4
+    SLIDE           shift and go to state 3
 
-    group                          shift and go to state 6
-    slide                          shift and go to state 2
-    statement                      shift and go to state 3
-    program                        shift and go to state 8
-
-state 4
-
-    (0) S' -> program .
-
-
-
-state 5
-
-    (15) slide -> SLIDE . ( params ) { contentgroup }
-
-    (               shift and go to state 9
-
+    program                        shift and go to state 9
+    group                          shift and go to state 1
+    statement                      shift and go to state 5
+    slide                          shift and go to state 6
 
 state 6
 
-    (3) statement -> group .
+    (4) statement -> slide .
 
-    GROUP           reduce using rule 3 (statement -> group .)
-    SLIDE           reduce using rule 3 (statement -> group .)
-    $end            reduce using rule 3 (statement -> group .)
+    GROUP           reduce using rule 4 (statement -> slide .)
+    SLIDE           reduce using rule 4 (statement -> slide .)
+    $end            reduce using rule 4 (statement -> slide .)
 
 
 state 7
-
-    (5) group -> GROUP ( . params ) { slidegroup }
-    (6) params -> . expression
-    (7) params -> . expression , params
-    (8) params -> .
-    (9) expression -> . STRING
-    (10) expression -> . NUMBER
-
-    )               reduce using rule 8 (params -> .)
-    STRING          shift and go to state 13
-    NUMBER          shift and go to state 11
-
-    expression                     shift and go to state 10
-    params                         shift and go to state 12
-
-state 8
-
-    (2) program -> statement program .
-
-    $end            reduce using rule 2 (program -> statement program .)
-
-
-state 9
 
     (15) slide -> SLIDE ( . params ) { contentgroup }
     (6) params -> . expression
@@ -220,22 +190,36 @@ state 9
     (10) expression -> . NUMBER
 
     )               reduce using rule 8 (params -> .)
-    STRING          shift and go to state 13
-    NUMBER          shift and go to state 11
+    STRING          shift and go to state 12
+    NUMBER          shift and go to state 10
 
-    expression                     shift and go to state 10
+    expression                     shift and go to state 13
+    params                         shift and go to state 11
+
+state 8
+
+    (5) group -> GROUP ( . params ) { slidegroup }
+    (6) params -> . expression
+    (7) params -> . expression , params
+    (8) params -> .
+    (9) expression -> . STRING
+    (10) expression -> . NUMBER
+
+    )               reduce using rule 8 (params -> .)
+    STRING          shift and go to state 12
+    NUMBER          shift and go to state 10
+
+    expression                     shift and go to state 13
     params                         shift and go to state 14
 
+state 9
+
+    (2) program -> statement program .
+
+    $end            reduce using rule 2 (program -> statement program .)
+
+
 state 10
-
-    (6) params -> expression .
-    (7) params -> expression . , params
-
-    )               reduce using rule 6 (params -> expression .)
-    ,               shift and go to state 15
-
-
-state 11
 
     (10) expression -> NUMBER .
 
@@ -243,14 +227,14 @@ state 11
     )               reduce using rule 10 (expression -> NUMBER .)
 
 
+state 11
+
+    (15) slide -> SLIDE ( params . ) { contentgroup }
+
+    )               shift and go to state 15
+
+
 state 12
-
-    (5) group -> GROUP ( params . ) { slidegroup }
-
-    )               shift and go to state 16
-
-
-state 13
 
     (9) expression -> STRING .
 
@@ -258,14 +242,30 @@ state 13
     )               reduce using rule 9 (expression -> STRING .)
 
 
+state 13
+
+    (6) params -> expression .
+    (7) params -> expression . , params
+
+    )               reduce using rule 6 (params -> expression .)
+    ,               shift and go to state 16
+
+
 state 14
 
-    (15) slide -> SLIDE ( params . ) { contentgroup }
+    (5) group -> GROUP ( params . ) { slidegroup }
 
     )               shift and go to state 17
 
 
 state 15
+
+    (15) slide -> SLIDE ( params ) . { contentgroup }
+
+    {               shift and go to state 18
+
+
+state 16
 
     (7) params -> expression , . params
     (6) params -> . expression
@@ -275,51 +275,20 @@ state 15
     (10) expression -> . NUMBER
 
     )               reduce using rule 8 (params -> .)
-    STRING          shift and go to state 13
-    NUMBER          shift and go to state 11
+    STRING          shift and go to state 12
+    NUMBER          shift and go to state 10
 
-    params                         shift and go to state 18
-    expression                     shift and go to state 10
-
-state 16
-
-    (5) group -> GROUP ( params ) . { slidegroup }
-
-    {               shift and go to state 19
-
+    params                         shift and go to state 19
+    expression                     shift and go to state 13
 
 state 17
 
-    (15) slide -> SLIDE ( params ) . { contentgroup }
+    (5) group -> GROUP ( params ) . { slidegroup }
 
     {               shift and go to state 20
 
 
 state 18
-
-    (7) params -> expression , params .
-
-    )               reduce using rule 7 (params -> expression , params .)
-
-
-state 19
-
-    (5) group -> GROUP ( params ) { . slidegroup }
-    (11) slidegroup -> . slide
-    (12) slidegroup -> . slidefor
-    (13) slidegroup -> . slide slidegroup
-    (14) slidegroup -> . slidefor slidegroup
-    (15) slide -> . SLIDE ( params ) { contentgroup }
-    (26) slidefor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
-
-    SLIDE           shift and go to state 5
-    FOR             shift and go to state 23
-
-    slide                          shift and go to state 24
-    slidegroup                     shift and go to state 22
-    slidefor                       shift and go to state 21
-
-state 20
 
     (15) slide -> SLIDE ( params ) { . contentgroup }
     (16) contentgroup -> . content
@@ -343,111 +312,75 @@ state 20
     (34) text -> . TEXT ( complexstring ) ;
     (35) richtext -> . RICHTEXT ( ) { elementgroup }
 
-    TITLE           shift and go to state 31
-    IMAGE           shift and go to state 34
-    LIST            shift and go to state 38
-    FOR             shift and go to state 29
-    HORIZONTALBOX   shift and go to state 39
-    VERTICALBOX     shift and go to state 33
-    TEXT            shift and go to state 32
-    RICHTEXT        shift and go to state 30
+    TITLE           shift and go to state 40
+    IMAGE           shift and go to state 32
+    LIST            shift and go to state 24
+    FOR             shift and go to state 37
+    HORIZONTALBOX   shift and go to state 35
+    VERTICALBOX     shift and go to state 36
+    TEXT            shift and go to state 27
+    RICHTEXT        shift and go to state 38
 
-    content                        shift and go to state 36
-    contenttext                    shift and go to state 37
-    text                           shift and go to state 25
-    box                            shift and go to state 26
-    image                          shift and go to state 27
-    verticalbox                    shift and go to state 28
-    contentfor                     shift and go to state 41
-    horizontalbox                  shift and go to state 44
-    title                          shift and go to state 42
-    richtext                       shift and go to state 40
-    list                           shift and go to state 43
-    contentgroup                   shift and go to state 35
+    content                        shift and go to state 30
+    contenttext                    shift and go to state 21
+    text                           shift and go to state 31
+    list                           shift and go to state 39
+    image                          shift and go to state 23
+    contentfor                     shift and go to state 33
+    richtext                       shift and go to state 34
+    contentgroup                   shift and go to state 22
+    verticalbox                    shift and go to state 25
+    horizontalbox                  shift and go to state 26
+    title                          shift and go to state 28
+    box                            shift and go to state 29
+
+state 19
+
+    (7) params -> expression , params .
+
+    )               reduce using rule 7 (params -> expression , params .)
+
+
+state 20
+
+    (5) group -> GROUP ( params ) { . slidegroup }
+    (11) slidegroup -> . slide
+    (12) slidegroup -> . slidefor
+    (13) slidegroup -> . slide slidegroup
+    (14) slidegroup -> . slidefor slidegroup
+    (15) slide -> . SLIDE ( params ) { contentgroup }
+    (26) slidefor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
+
+    SLIDE           shift and go to state 3
+    FOR             shift and go to state 44
+
+    slide                          shift and go to state 43
+    slidegroup                     shift and go to state 42
+    slidefor                       shift and go to state 41
 
 state 21
 
-    (12) slidegroup -> slidefor .
-    (14) slidegroup -> slidefor . slidegroup
-    (11) slidegroup -> . slide
-    (12) slidegroup -> . slidefor
-    (13) slidegroup -> . slide slidegroup
-    (14) slidegroup -> . slidefor slidegroup
-    (15) slide -> . SLIDE ( params ) { contentgroup }
-    (26) slidefor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
+    (21) content -> contenttext .
 
-    }               reduce using rule 12 (slidegroup -> slidefor .)
-    SLIDE           shift and go to state 5
-    FOR             shift and go to state 23
+    TITLE           reduce using rule 21 (content -> contenttext .)
+    IMAGE           reduce using rule 21 (content -> contenttext .)
+    LIST            reduce using rule 21 (content -> contenttext .)
+    FOR             reduce using rule 21 (content -> contenttext .)
+    HORIZONTALBOX   reduce using rule 21 (content -> contenttext .)
+    VERTICALBOX     reduce using rule 21 (content -> contenttext .)
+    TEXT            reduce using rule 21 (content -> contenttext .)
+    RICHTEXT        reduce using rule 21 (content -> contenttext .)
+    }               reduce using rule 21 (content -> contenttext .)
 
-    slidefor                       shift and go to state 21
-    slidegroup                     shift and go to state 45
-    slide                          shift and go to state 24
 
 state 22
 
-    (5) group -> GROUP ( params ) { slidegroup . }
+    (15) slide -> SLIDE ( params ) { contentgroup . }
 
-    }               shift and go to state 46
+    }               shift and go to state 45
 
 
 state 23
-
-    (26) slidefor -> FOR . ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
-
-    (               shift and go to state 47
-
-
-state 24
-
-    (11) slidegroup -> slide .
-    (13) slidegroup -> slide . slidegroup
-    (11) slidegroup -> . slide
-    (12) slidegroup -> . slidefor
-    (13) slidegroup -> . slide slidegroup
-    (14) slidegroup -> . slidefor slidegroup
-    (15) slide -> . SLIDE ( params ) { contentgroup }
-    (26) slidefor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
-
-    }               reduce using rule 11 (slidegroup -> slide .)
-    SLIDE           shift and go to state 5
-    FOR             shift and go to state 23
-
-    slide                          shift and go to state 24
-    slidegroup                     shift and go to state 48
-    slidefor                       shift and go to state 21
-
-state 25
-
-    (24) contenttext -> text .
-
-    TITLE           reduce using rule 24 (contenttext -> text .)
-    IMAGE           reduce using rule 24 (contenttext -> text .)
-    LIST            reduce using rule 24 (contenttext -> text .)
-    FOR             reduce using rule 24 (contenttext -> text .)
-    HORIZONTALBOX   reduce using rule 24 (contenttext -> text .)
-    VERTICALBOX     reduce using rule 24 (contenttext -> text .)
-    TEXT            reduce using rule 24 (contenttext -> text .)
-    RICHTEXT        reduce using rule 24 (contenttext -> text .)
-    }               reduce using rule 24 (contenttext -> text .)
-
-
-state 26
-
-    (19) content -> box .
-
-    TITLE           reduce using rule 19 (content -> box .)
-    IMAGE           reduce using rule 19 (content -> box .)
-    LIST            reduce using rule 19 (content -> box .)
-    FOR             reduce using rule 19 (content -> box .)
-    HORIZONTALBOX   reduce using rule 19 (content -> box .)
-    VERTICALBOX     reduce using rule 19 (content -> box .)
-    TEXT            reduce using rule 19 (content -> box .)
-    RICHTEXT        reduce using rule 19 (content -> box .)
-    }               reduce using rule 19 (content -> box .)
-
-
-state 27
 
     (20) content -> image .
 
@@ -462,7 +395,14 @@ state 27
     }               reduce using rule 20 (content -> image .)
 
 
-state 28
+state 24
+
+    (39) list -> LIST . ( STRING ) { textlist }
+
+    (               shift and go to state 46
+
+
+state 25
 
     (30) box -> verticalbox .
 
@@ -477,56 +417,59 @@ state 28
     }               reduce using rule 30 (box -> verticalbox .)
 
 
-state 29
+state 26
 
-    (27) contentfor -> FOR . ( IDENTIFIER , NUMBER , NUMBER ) { contentgroup }
+    (29) box -> horizontalbox .
 
-    (               shift and go to state 49
-
-
-state 30
-
-    (35) richtext -> RICHTEXT . ( ) { elementgroup }
-
-    (               shift and go to state 50
-
-
-state 31
-
-    (28) title -> TITLE . ( complexstring ) ;
-
-    (               shift and go to state 51
+    TITLE           reduce using rule 29 (box -> horizontalbox .)
+    IMAGE           reduce using rule 29 (box -> horizontalbox .)
+    LIST            reduce using rule 29 (box -> horizontalbox .)
+    FOR             reduce using rule 29 (box -> horizontalbox .)
+    HORIZONTALBOX   reduce using rule 29 (box -> horizontalbox .)
+    VERTICALBOX     reduce using rule 29 (box -> horizontalbox .)
+    TEXT            reduce using rule 29 (box -> horizontalbox .)
+    RICHTEXT        reduce using rule 29 (box -> horizontalbox .)
+    }               reduce using rule 29 (box -> horizontalbox .)
 
 
-state 32
+state 27
 
     (34) text -> TEXT . ( complexstring ) ;
 
-    (               shift and go to state 52
+    (               shift and go to state 47
 
 
-state 33
+state 28
 
-    (32) verticalbox -> VERTICALBOX . ( NUMBER ) { contentgroup }
+    (18) content -> title .
 
-    (               shift and go to state 53
-
-
-state 34
-
-    (33) image -> IMAGE . ( complexstring ) ;
-
-    (               shift and go to state 54
-
-
-state 35
-
-    (15) slide -> SLIDE ( params ) { contentgroup . }
-
-    }               shift and go to state 55
+    TITLE           reduce using rule 18 (content -> title .)
+    IMAGE           reduce using rule 18 (content -> title .)
+    LIST            reduce using rule 18 (content -> title .)
+    FOR             reduce using rule 18 (content -> title .)
+    HORIZONTALBOX   reduce using rule 18 (content -> title .)
+    VERTICALBOX     reduce using rule 18 (content -> title .)
+    TEXT            reduce using rule 18 (content -> title .)
+    RICHTEXT        reduce using rule 18 (content -> title .)
+    }               reduce using rule 18 (content -> title .)
 
 
-state 36
+state 29
+
+    (19) content -> box .
+
+    TITLE           reduce using rule 19 (content -> box .)
+    IMAGE           reduce using rule 19 (content -> box .)
+    LIST            reduce using rule 19 (content -> box .)
+    FOR             reduce using rule 19 (content -> box .)
+    HORIZONTALBOX   reduce using rule 19 (content -> box .)
+    VERTICALBOX     reduce using rule 19 (content -> box .)
+    TEXT            reduce using rule 19 (content -> box .)
+    RICHTEXT        reduce using rule 19 (content -> box .)
+    }               reduce using rule 19 (content -> box .)
+
+
+state 30
 
     (16) contentgroup -> content .
     (17) contentgroup -> content . contentgroup
@@ -552,73 +495,51 @@ state 36
     (35) richtext -> . RICHTEXT ( ) { elementgroup }
 
     }               reduce using rule 16 (contentgroup -> content .)
-    TITLE           shift and go to state 31
-    IMAGE           shift and go to state 34
-    LIST            shift and go to state 38
-    FOR             shift and go to state 29
-    HORIZONTALBOX   shift and go to state 39
-    VERTICALBOX     shift and go to state 33
-    TEXT            shift and go to state 32
-    RICHTEXT        shift and go to state 30
+    TITLE           shift and go to state 40
+    IMAGE           shift and go to state 32
+    LIST            shift and go to state 24
+    FOR             shift and go to state 37
+    HORIZONTALBOX   shift and go to state 35
+    VERTICALBOX     shift and go to state 36
+    TEXT            shift and go to state 27
+    RICHTEXT        shift and go to state 38
 
-    content                        shift and go to state 36
-    contenttext                    shift and go to state 37
-    text                           shift and go to state 25
-    box                            shift and go to state 26
-    image                          shift and go to state 27
-    verticalbox                    shift and go to state 28
-    contentfor                     shift and go to state 41
-    horizontalbox                  shift and go to state 44
-    title                          shift and go to state 42
-    richtext                       shift and go to state 40
-    list                           shift and go to state 43
-    contentgroup                   shift and go to state 56
+    content                        shift and go to state 30
+    contenttext                    shift and go to state 21
+    text                           shift and go to state 31
+    image                          shift and go to state 23
+    contentfor                     shift and go to state 33
+    richtext                       shift and go to state 34
+    contentgroup                   shift and go to state 48
+    verticalbox                    shift and go to state 25
+    horizontalbox                  shift and go to state 26
+    list                           shift and go to state 39
+    title                          shift and go to state 28
+    box                            shift and go to state 29
 
-state 37
+state 31
 
-    (21) content -> contenttext .
+    (24) contenttext -> text .
 
-    TITLE           reduce using rule 21 (content -> contenttext .)
-    IMAGE           reduce using rule 21 (content -> contenttext .)
-    LIST            reduce using rule 21 (content -> contenttext .)
-    FOR             reduce using rule 21 (content -> contenttext .)
-    HORIZONTALBOX   reduce using rule 21 (content -> contenttext .)
-    VERTICALBOX     reduce using rule 21 (content -> contenttext .)
-    TEXT            reduce using rule 21 (content -> contenttext .)
-    RICHTEXT        reduce using rule 21 (content -> contenttext .)
-    }               reduce using rule 21 (content -> contenttext .)
-
-
-state 38
-
-    (39) list -> LIST . ( STRING ) { textlist }
-
-    (               shift and go to state 57
+    TEXT            reduce using rule 24 (contenttext -> text .)
+    RICHTEXT        reduce using rule 24 (contenttext -> text .)
+    }               reduce using rule 24 (contenttext -> text .)
+    TITLE           reduce using rule 24 (contenttext -> text .)
+    IMAGE           reduce using rule 24 (contenttext -> text .)
+    LIST            reduce using rule 24 (contenttext -> text .)
+    FOR             reduce using rule 24 (contenttext -> text .)
+    HORIZONTALBOX   reduce using rule 24 (contenttext -> text .)
+    VERTICALBOX     reduce using rule 24 (contenttext -> text .)
 
 
-state 39
+state 32
 
-    (31) horizontalbox -> HORIZONTALBOX . ( NUMBER ) { contentgroup }
+    (33) image -> IMAGE . ( complexstring ) ;
 
-    (               shift and go to state 58
-
-
-state 40
-
-    (25) contenttext -> richtext .
-
-    TITLE           reduce using rule 25 (contenttext -> richtext .)
-    IMAGE           reduce using rule 25 (contenttext -> richtext .)
-    LIST            reduce using rule 25 (contenttext -> richtext .)
-    FOR             reduce using rule 25 (contenttext -> richtext .)
-    HORIZONTALBOX   reduce using rule 25 (contenttext -> richtext .)
-    VERTICALBOX     reduce using rule 25 (contenttext -> richtext .)
-    TEXT            reduce using rule 25 (contenttext -> richtext .)
-    RICHTEXT        reduce using rule 25 (contenttext -> richtext .)
-    }               reduce using rule 25 (contenttext -> richtext .)
+    (               shift and go to state 49
 
 
-state 41
+state 33
 
     (23) content -> contentfor .
 
@@ -633,22 +554,50 @@ state 41
     }               reduce using rule 23 (content -> contentfor .)
 
 
-state 42
+state 34
 
-    (18) content -> title .
+    (25) contenttext -> richtext .
 
-    TITLE           reduce using rule 18 (content -> title .)
-    IMAGE           reduce using rule 18 (content -> title .)
-    LIST            reduce using rule 18 (content -> title .)
-    FOR             reduce using rule 18 (content -> title .)
-    HORIZONTALBOX   reduce using rule 18 (content -> title .)
-    VERTICALBOX     reduce using rule 18 (content -> title .)
-    TEXT            reduce using rule 18 (content -> title .)
-    RICHTEXT        reduce using rule 18 (content -> title .)
-    }               reduce using rule 18 (content -> title .)
+    TEXT            reduce using rule 25 (contenttext -> richtext .)
+    RICHTEXT        reduce using rule 25 (contenttext -> richtext .)
+    }               reduce using rule 25 (contenttext -> richtext .)
+    TITLE           reduce using rule 25 (contenttext -> richtext .)
+    IMAGE           reduce using rule 25 (contenttext -> richtext .)
+    LIST            reduce using rule 25 (contenttext -> richtext .)
+    FOR             reduce using rule 25 (contenttext -> richtext .)
+    HORIZONTALBOX   reduce using rule 25 (contenttext -> richtext .)
+    VERTICALBOX     reduce using rule 25 (contenttext -> richtext .)
 
 
-state 43
+state 35
+
+    (31) horizontalbox -> HORIZONTALBOX . ( NUMBER ) { contentgroup }
+
+    (               shift and go to state 50
+
+
+state 36
+
+    (32) verticalbox -> VERTICALBOX . ( NUMBER ) { contentgroup }
+
+    (               shift and go to state 51
+
+
+state 37
+
+    (27) contentfor -> FOR . ( IDENTIFIER , NUMBER , NUMBER ) { contentgroup }
+
+    (               shift and go to state 52
+
+
+state 38
+
+    (35) richtext -> RICHTEXT . ( ) { elementgroup }
+
+    (               shift and go to state 53
+
+
+state 39
 
     (22) content -> list .
 
@@ -663,29 +612,168 @@ state 43
     }               reduce using rule 22 (content -> list .)
 
 
+state 40
+
+    (28) title -> TITLE . ( complexstring ) ;
+
+    (               shift and go to state 54
+
+
+state 41
+
+    (12) slidegroup -> slidefor .
+    (14) slidegroup -> slidefor . slidegroup
+    (11) slidegroup -> . slide
+    (12) slidegroup -> . slidefor
+    (13) slidegroup -> . slide slidegroup
+    (14) slidegroup -> . slidefor slidegroup
+    (15) slide -> . SLIDE ( params ) { contentgroup }
+    (26) slidefor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
+
+    }               reduce using rule 12 (slidegroup -> slidefor .)
+    SLIDE           shift and go to state 3
+    FOR             shift and go to state 44
+
+    slidefor                       shift and go to state 41
+    slidegroup                     shift and go to state 55
+    slide                          shift and go to state 43
+
+state 42
+
+    (5) group -> GROUP ( params ) { slidegroup . }
+
+    }               shift and go to state 56
+
+
+state 43
+
+    (11) slidegroup -> slide .
+    (13) slidegroup -> slide . slidegroup
+    (11) slidegroup -> . slide
+    (12) slidegroup -> . slidefor
+    (13) slidegroup -> . slide slidegroup
+    (14) slidegroup -> . slidefor slidegroup
+    (15) slide -> . SLIDE ( params ) { contentgroup }
+    (26) slidefor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
+
+    }               reduce using rule 11 (slidegroup -> slide .)
+    SLIDE           shift and go to state 3
+    FOR             shift and go to state 44
+
+    slide                          shift and go to state 43
+    slidegroup                     shift and go to state 57
+    slidefor                       shift and go to state 41
+
 state 44
 
-    (29) box -> horizontalbox .
+    (26) slidefor -> FOR . ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
 
-    TITLE           reduce using rule 29 (box -> horizontalbox .)
-    IMAGE           reduce using rule 29 (box -> horizontalbox .)
-    LIST            reduce using rule 29 (box -> horizontalbox .)
-    FOR             reduce using rule 29 (box -> horizontalbox .)
-    HORIZONTALBOX   reduce using rule 29 (box -> horizontalbox .)
-    VERTICALBOX     reduce using rule 29 (box -> horizontalbox .)
-    TEXT            reduce using rule 29 (box -> horizontalbox .)
-    RICHTEXT        reduce using rule 29 (box -> horizontalbox .)
-    }               reduce using rule 29 (box -> horizontalbox .)
+    (               shift and go to state 58
 
 
 state 45
+
+    (15) slide -> SLIDE ( params ) { contentgroup } .
+
+    GROUP           reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
+    SLIDE           reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
+    $end            reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
+    FOR             reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
+    }               reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
+
+
+state 46
+
+    (39) list -> LIST ( . STRING ) { textlist }
+
+    STRING          shift and go to state 59
+
+
+state 47
+
+    (34) text -> TEXT ( . complexstring ) ;
+    (42) complexstring -> . contentstring
+    (43) complexstring -> . contentstring PLUS complexstring
+    (44) contentstring -> . STRING
+    (45) contentstring -> . IDENTIFIER
+
+    STRING          shift and go to state 63
+    IDENTIFIER      shift and go to state 60
+
+    contentstring                  shift and go to state 61
+    complexstring                  shift and go to state 62
+
+state 48
+
+    (17) contentgroup -> content contentgroup .
+
+    }               reduce using rule 17 (contentgroup -> content contentgroup .)
+
+
+state 49
+
+    (33) image -> IMAGE ( . complexstring ) ;
+    (42) complexstring -> . contentstring
+    (43) complexstring -> . contentstring PLUS complexstring
+    (44) contentstring -> . STRING
+    (45) contentstring -> . IDENTIFIER
+
+    STRING          shift and go to state 63
+    IDENTIFIER      shift and go to state 60
+
+    contentstring                  shift and go to state 61
+    complexstring                  shift and go to state 64
+
+state 50
+
+    (31) horizontalbox -> HORIZONTALBOX ( . NUMBER ) { contentgroup }
+
+    NUMBER          shift and go to state 65
+
+
+state 51
+
+    (32) verticalbox -> VERTICALBOX ( . NUMBER ) { contentgroup }
+
+    NUMBER          shift and go to state 66
+
+
+state 52
+
+    (27) contentfor -> FOR ( . IDENTIFIER , NUMBER , NUMBER ) { contentgroup }
+
+    IDENTIFIER      shift and go to state 67
+
+
+state 53
+
+    (35) richtext -> RICHTEXT ( . ) { elementgroup }
+
+    )               shift and go to state 68
+
+
+state 54
+
+    (28) title -> TITLE ( . complexstring ) ;
+    (42) complexstring -> . contentstring
+    (43) complexstring -> . contentstring PLUS complexstring
+    (44) contentstring -> . STRING
+    (45) contentstring -> . IDENTIFIER
+
+    STRING          shift and go to state 63
+    IDENTIFIER      shift and go to state 60
+
+    contentstring                  shift and go to state 61
+    complexstring                  shift and go to state 69
+
+state 55
 
     (14) slidegroup -> slidefor slidegroup .
 
     }               reduce using rule 14 (slidegroup -> slidefor slidegroup .)
 
 
-state 46
+state 56
 
     (5) group -> GROUP ( params ) { slidegroup } .
 
@@ -694,154 +782,28 @@ state 46
     $end            reduce using rule 5 (group -> GROUP ( params ) { slidegroup } .)
 
 
-state 47
-
-    (26) slidefor -> FOR ( . IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
-
-    IDENTIFIER      shift and go to state 59
-
-
-state 48
+state 57
 
     (13) slidegroup -> slide slidegroup .
 
     }               reduce using rule 13 (slidegroup -> slide slidegroup .)
 
 
-state 49
-
-    (27) contentfor -> FOR ( . IDENTIFIER , NUMBER , NUMBER ) { contentgroup }
-
-    IDENTIFIER      shift and go to state 60
-
-
-state 50
-
-    (35) richtext -> RICHTEXT ( . ) { elementgroup }
-
-    )               shift and go to state 61
-
-
-state 51
-
-    (28) title -> TITLE ( . complexstring ) ;
-    (42) complexstring -> . contentstring
-    (43) complexstring -> . contentstring PLUS complexstring
-    (44) contentstring -> . STRING
-    (45) contentstring -> . IDENTIFIER
-
-    STRING          shift and go to state 65
-    IDENTIFIER      shift and go to state 64
-
-    contentstring                  shift and go to state 63
-    complexstring                  shift and go to state 62
-
-state 52
-
-    (34) text -> TEXT ( . complexstring ) ;
-    (42) complexstring -> . contentstring
-    (43) complexstring -> . contentstring PLUS complexstring
-    (44) contentstring -> . STRING
-    (45) contentstring -> . IDENTIFIER
-
-    STRING          shift and go to state 65
-    IDENTIFIER      shift and go to state 64
-
-    contentstring                  shift and go to state 63
-    complexstring                  shift and go to state 66
-
-state 53
-
-    (32) verticalbox -> VERTICALBOX ( . NUMBER ) { contentgroup }
-
-    NUMBER          shift and go to state 67
-
-
-state 54
-
-    (33) image -> IMAGE ( . complexstring ) ;
-    (42) complexstring -> . contentstring
-    (43) complexstring -> . contentstring PLUS complexstring
-    (44) contentstring -> . STRING
-    (45) contentstring -> . IDENTIFIER
-
-    STRING          shift and go to state 65
-    IDENTIFIER      shift and go to state 64
-
-    contentstring                  shift and go to state 63
-    complexstring                  shift and go to state 68
-
-state 55
-
-    (15) slide -> SLIDE ( params ) { contentgroup } .
-
-    SLIDE           reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
-    FOR             reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
-    }               reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
-    GROUP           reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
-    $end            reduce using rule 15 (slide -> SLIDE ( params ) { contentgroup } .)
-
-
-state 56
-
-    (17) contentgroup -> content contentgroup .
-
-    }               reduce using rule 17 (contentgroup -> content contentgroup .)
-
-
-state 57
-
-    (39) list -> LIST ( . STRING ) { textlist }
-
-    STRING          shift and go to state 69
-
-
 state 58
 
-    (31) horizontalbox -> HORIZONTALBOX ( . NUMBER ) { contentgroup }
+    (26) slidefor -> FOR ( . IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
 
-    NUMBER          shift and go to state 70
+    IDENTIFIER      shift and go to state 70
 
 
 state 59
 
-    (26) slidefor -> FOR ( IDENTIFIER . , NUMBER , NUMBER ) { slidegroup }
+    (39) list -> LIST ( STRING . ) { textlist }
 
-    ,               shift and go to state 71
+    )               shift and go to state 71
 
 
 state 60
-
-    (27) contentfor -> FOR ( IDENTIFIER . , NUMBER , NUMBER ) { contentgroup }
-
-    ,               shift and go to state 72
-
-
-state 61
-
-    (35) richtext -> RICHTEXT ( ) . { elementgroup }
-
-    {               shift and go to state 73
-
-
-state 62
-
-    (28) title -> TITLE ( complexstring . ) ;
-
-    )               shift and go to state 74
-
-
-state 63
-
-    (42) complexstring -> contentstring .
-    (43) complexstring -> contentstring . PLUS complexstring
-
-    )               reduce using rule 42 (complexstring -> contentstring .)
-    ,               reduce using rule 42 (complexstring -> contentstring .)
-    PLUS            shift and go to state 75
-
-
-state 64
 
     (45) contentstring -> IDENTIFIER .
 
@@ -850,7 +812,24 @@ state 64
     ,               reduce using rule 45 (contentstring -> IDENTIFIER .)
 
 
-state 65
+state 61
+
+    (42) complexstring -> contentstring .
+    (43) complexstring -> contentstring . PLUS complexstring
+
+    )               reduce using rule 42 (complexstring -> contentstring .)
+    ,               reduce using rule 42 (complexstring -> contentstring .)
+    PLUS            shift and go to state 72
+
+
+state 62
+
+    (34) text -> TEXT ( complexstring . ) ;
+
+    )               shift and go to state 73
+
+
+state 63
 
     (44) contentstring -> STRING .
 
@@ -859,75 +838,63 @@ state 65
     ,               reduce using rule 44 (contentstring -> STRING .)
 
 
+state 64
+
+    (33) image -> IMAGE ( complexstring . ) ;
+
+    )               shift and go to state 74
+
+
+state 65
+
+    (31) horizontalbox -> HORIZONTALBOX ( NUMBER . ) { contentgroup }
+
+    )               shift and go to state 75
+
+
 state 66
 
-    (34) text -> TEXT ( complexstring . ) ;
+    (32) verticalbox -> VERTICALBOX ( NUMBER . ) { contentgroup }
 
     )               shift and go to state 76
 
 
 state 67
 
-    (32) verticalbox -> VERTICALBOX ( NUMBER . ) { contentgroup }
+    (27) contentfor -> FOR ( IDENTIFIER . , NUMBER , NUMBER ) { contentgroup }
 
-    )               shift and go to state 77
+    ,               shift and go to state 77
 
 
 state 68
 
-    (33) image -> IMAGE ( complexstring . ) ;
+    (35) richtext -> RICHTEXT ( ) . { elementgroup }
 
-    )               shift and go to state 78
+    {               shift and go to state 78
 
 
 state 69
 
-    (39) list -> LIST ( STRING . ) { textlist }
+    (28) title -> TITLE ( complexstring . ) ;
 
     )               shift and go to state 79
 
 
 state 70
 
-    (31) horizontalbox -> HORIZONTALBOX ( NUMBER . ) { contentgroup }
+    (26) slidefor -> FOR ( IDENTIFIER . , NUMBER , NUMBER ) { slidegroup }
 
-    )               shift and go to state 80
+    ,               shift and go to state 80
 
 
 state 71
 
-    (26) slidefor -> FOR ( IDENTIFIER , . NUMBER , NUMBER ) { slidegroup }
+    (39) list -> LIST ( STRING ) . { textlist }
 
-    NUMBER          shift and go to state 81
+    {               shift and go to state 81
 
 
 state 72
-
-    (27) contentfor -> FOR ( IDENTIFIER , . NUMBER , NUMBER ) { contentgroup }
-
-    NUMBER          shift and go to state 82
-
-
-state 73
-
-    (35) richtext -> RICHTEXT ( ) { . elementgroup }
-    (36) elementgroup -> . element
-    (37) elementgroup -> . element elementgroup
-    (38) element -> . ELEMENT ( complexstring , STRING ) ;
-
-    ELEMENT         shift and go to state 83
-
-    element                        shift and go to state 85
-    elementgroup                   shift and go to state 84
-
-state 74
-
-    (28) title -> TITLE ( complexstring ) . ;
-
-    ;               shift and go to state 86
-
-
-state 75
 
     (43) complexstring -> contentstring PLUS . complexstring
     (42) complexstring -> . contentstring
@@ -935,105 +902,92 @@ state 75
     (44) contentstring -> . STRING
     (45) contentstring -> . IDENTIFIER
 
-    STRING          shift and go to state 65
-    IDENTIFIER      shift and go to state 64
+    STRING          shift and go to state 63
+    IDENTIFIER      shift and go to state 60
 
-    contentstring                  shift and go to state 63
-    complexstring                  shift and go to state 87
+    contentstring                  shift and go to state 61
+    complexstring                  shift and go to state 82
 
-state 76
+state 73
 
     (34) text -> TEXT ( complexstring ) . ;
 
-    ;               shift and go to state 88
+    ;               shift and go to state 83
+
+
+state 74
+
+    (33) image -> IMAGE ( complexstring ) . ;
+
+    ;               shift and go to state 84
+
+
+state 75
+
+    (31) horizontalbox -> HORIZONTALBOX ( NUMBER ) . { contentgroup }
+
+    {               shift and go to state 85
+
+
+state 76
+
+    (32) verticalbox -> VERTICALBOX ( NUMBER ) . { contentgroup }
+
+    {               shift and go to state 86
 
 
 state 77
 
-    (32) verticalbox -> VERTICALBOX ( NUMBER ) . { contentgroup }
+    (27) contentfor -> FOR ( IDENTIFIER , . NUMBER , NUMBER ) { contentgroup }
 
-    {               shift and go to state 89
+    NUMBER          shift and go to state 87
 
 
 state 78
 
-    (33) image -> IMAGE ( complexstring ) . ;
-
-    ;               shift and go to state 90
-
-
-state 79
-
-    (39) list -> LIST ( STRING ) . { textlist }
-
-    {               shift and go to state 91
-
-
-state 80
-
-    (31) horizontalbox -> HORIZONTALBOX ( NUMBER ) . { contentgroup }
-
-    {               shift and go to state 92
-
-
-state 81
-
-    (26) slidefor -> FOR ( IDENTIFIER , NUMBER . , NUMBER ) { slidegroup }
-
-    ,               shift and go to state 93
-
-
-state 82
-
-    (27) contentfor -> FOR ( IDENTIFIER , NUMBER . , NUMBER ) { contentgroup }
-
-    ,               shift and go to state 94
-
-
-state 83
-
-    (38) element -> ELEMENT . ( complexstring , STRING ) ;
-
-    (               shift and go to state 95
-
-
-state 84
-
-    (35) richtext -> RICHTEXT ( ) { elementgroup . }
-
-    }               shift and go to state 96
-
-
-state 85
-
-    (36) elementgroup -> element .
-    (37) elementgroup -> element . elementgroup
+    (35) richtext -> RICHTEXT ( ) { . elementgroup }
     (36) elementgroup -> . element
     (37) elementgroup -> . element elementgroup
     (38) element -> . ELEMENT ( complexstring , STRING ) ;
 
-    }               reduce using rule 36 (elementgroup -> element .)
-    ELEMENT         shift and go to state 83
+    ELEMENT         shift and go to state 88
 
-    element                        shift and go to state 85
-    elementgroup                   shift and go to state 97
+    elementgroup                   shift and go to state 90
+    element                        shift and go to state 89
 
-state 86
+state 79
 
-    (28) title -> TITLE ( complexstring ) ; .
+    (28) title -> TITLE ( complexstring ) . ;
 
-    TITLE           reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
-    IMAGE           reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
-    LIST            reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
-    FOR             reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
-    HORIZONTALBOX   reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
-    VERTICALBOX     reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
-    TEXT            reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
-    RICHTEXT        reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
-    }               reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    ;               shift and go to state 91
 
 
-state 87
+state 80
+
+    (26) slidefor -> FOR ( IDENTIFIER , . NUMBER , NUMBER ) { slidegroup }
+
+    NUMBER          shift and go to state 92
+
+
+state 81
+
+    (39) list -> LIST ( STRING ) { . textlist }
+    (40) textlist -> . contenttext
+    (41) textlist -> . contenttext textlist
+    (24) contenttext -> . text
+    (25) contenttext -> . richtext
+    (34) text -> . TEXT ( complexstring ) ;
+    (35) richtext -> . RICHTEXT ( ) { elementgroup }
+
+    TEXT            shift and go to state 27
+    RICHTEXT        shift and go to state 38
+
+    contenttext                    shift and go to state 93
+    text                           shift and go to state 31
+    textlist                       shift and go to state 94
+    richtext                       shift and go to state 34
+
+state 82
 
     (43) complexstring -> contentstring PLUS complexstring .
 
@@ -1041,7 +995,7 @@ state 87
     ,               reduce using rule 43 (complexstring -> contentstring PLUS complexstring .)
 
 
-state 88
+state 83
 
     (34) text -> TEXT ( complexstring ) ; .
 
@@ -1056,53 +1010,7 @@ state 88
     VERTICALBOX     reduce using rule 34 (text -> TEXT ( complexstring ) ; .)
 
 
-state 89
-
-    (32) verticalbox -> VERTICALBOX ( NUMBER ) { . contentgroup }
-    (16) contentgroup -> . content
-    (17) contentgroup -> . content contentgroup
-    (18) content -> . title
-    (19) content -> . box
-    (20) content -> . image
-    (21) content -> . contenttext
-    (22) content -> . list
-    (23) content -> . contentfor
-    (28) title -> . TITLE ( complexstring ) ;
-    (29) box -> . horizontalbox
-    (30) box -> . verticalbox
-    (33) image -> . IMAGE ( complexstring ) ;
-    (24) contenttext -> . text
-    (25) contenttext -> . richtext
-    (39) list -> . LIST ( STRING ) { textlist }
-    (27) contentfor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { contentgroup }
-    (31) horizontalbox -> . HORIZONTALBOX ( NUMBER ) { contentgroup }
-    (32) verticalbox -> . VERTICALBOX ( NUMBER ) { contentgroup }
-    (34) text -> . TEXT ( complexstring ) ;
-    (35) richtext -> . RICHTEXT ( ) { elementgroup }
-
-    TITLE           shift and go to state 31
-    IMAGE           shift and go to state 34
-    LIST            shift and go to state 38
-    FOR             shift and go to state 29
-    HORIZONTALBOX   shift and go to state 39
-    VERTICALBOX     shift and go to state 33
-    TEXT            shift and go to state 32
-    RICHTEXT        shift and go to state 30
-
-    content                        shift and go to state 36
-    contenttext                    shift and go to state 37
-    text                           shift and go to state 25
-    box                            shift and go to state 26
-    image                          shift and go to state 27
-    verticalbox                    shift and go to state 28
-    contentfor                     shift and go to state 41
-    horizontalbox                  shift and go to state 44
-    title                          shift and go to state 42
-    richtext                       shift and go to state 40
-    list                           shift and go to state 43
-    contentgroup                   shift and go to state 98
-
-state 90
+state 84
 
     (33) image -> IMAGE ( complexstring ) ; .
 
@@ -1117,25 +1025,7 @@ state 90
     }               reduce using rule 33 (image -> IMAGE ( complexstring ) ; .)
 
 
-state 91
-
-    (39) list -> LIST ( STRING ) { . textlist }
-    (40) textlist -> . contenttext
-    (41) textlist -> . contenttext textlist
-    (24) contenttext -> . text
-    (25) contenttext -> . richtext
-    (34) text -> . TEXT ( complexstring ) ;
-    (35) richtext -> . RICHTEXT ( ) { elementgroup }
-
-    TEXT            shift and go to state 32
-    RICHTEXT        shift and go to state 30
-
-    contenttext                    shift and go to state 99
-    text                           shift and go to state 25
-    richtext                       shift and go to state 40
-    textlist                       shift and go to state 100
-
-state 92
+state 85
 
     (31) horizontalbox -> HORIZONTALBOX ( NUMBER ) { . contentgroup }
     (16) contentgroup -> . content
@@ -1159,43 +1049,180 @@ state 92
     (34) text -> . TEXT ( complexstring ) ;
     (35) richtext -> . RICHTEXT ( ) { elementgroup }
 
-    TITLE           shift and go to state 31
-    IMAGE           shift and go to state 34
-    LIST            shift and go to state 38
-    FOR             shift and go to state 29
-    HORIZONTALBOX   shift and go to state 39
-    VERTICALBOX     shift and go to state 33
-    TEXT            shift and go to state 32
-    RICHTEXT        shift and go to state 30
+    TITLE           shift and go to state 40
+    IMAGE           shift and go to state 32
+    LIST            shift and go to state 24
+    FOR             shift and go to state 37
+    HORIZONTALBOX   shift and go to state 35
+    VERTICALBOX     shift and go to state 36
+    TEXT            shift and go to state 27
+    RICHTEXT        shift and go to state 38
 
-    content                        shift and go to state 36
-    contenttext                    shift and go to state 37
-    text                           shift and go to state 25
-    box                            shift and go to state 26
-    image                          shift and go to state 27
-    verticalbox                    shift and go to state 28
-    contentfor                     shift and go to state 41
-    horizontalbox                  shift and go to state 44
-    title                          shift and go to state 42
-    richtext                       shift and go to state 40
-    list                           shift and go to state 43
-    contentgroup                   shift and go to state 101
+    content                        shift and go to state 30
+    contenttext                    shift and go to state 21
+    text                           shift and go to state 31
+    image                          shift and go to state 23
+    contentfor                     shift and go to state 33
+    richtext                       shift and go to state 34
+    contentgroup                   shift and go to state 95
+    verticalbox                    shift and go to state 25
+    horizontalbox                  shift and go to state 26
+    list                           shift and go to state 39
+    title                          shift and go to state 28
+    box                            shift and go to state 29
+
+state 86
+
+    (32) verticalbox -> VERTICALBOX ( NUMBER ) { . contentgroup }
+    (16) contentgroup -> . content
+    (17) contentgroup -> . content contentgroup
+    (18) content -> . title
+    (19) content -> . box
+    (20) content -> . image
+    (21) content -> . contenttext
+    (22) content -> . list
+    (23) content -> . contentfor
+    (28) title -> . TITLE ( complexstring ) ;
+    (29) box -> . horizontalbox
+    (30) box -> . verticalbox
+    (33) image -> . IMAGE ( complexstring ) ;
+    (24) contenttext -> . text
+    (25) contenttext -> . richtext
+    (39) list -> . LIST ( STRING ) { textlist }
+    (27) contentfor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { contentgroup }
+    (31) horizontalbox -> . HORIZONTALBOX ( NUMBER ) { contentgroup }
+    (32) verticalbox -> . VERTICALBOX ( NUMBER ) { contentgroup }
+    (34) text -> . TEXT ( complexstring ) ;
+    (35) richtext -> . RICHTEXT ( ) { elementgroup }
+
+    TITLE           shift and go to state 40
+    IMAGE           shift and go to state 32
+    LIST            shift and go to state 24
+    FOR             shift and go to state 37
+    HORIZONTALBOX   shift and go to state 35
+    VERTICALBOX     shift and go to state 36
+    TEXT            shift and go to state 27
+    RICHTEXT        shift and go to state 38
+
+    content                        shift and go to state 30
+    contenttext                    shift and go to state 21
+    text                           shift and go to state 31
+    image                          shift and go to state 23
+    contentfor                     shift and go to state 33
+    richtext                       shift and go to state 34
+    contentgroup                   shift and go to state 96
+    verticalbox                    shift and go to state 25
+    horizontalbox                  shift and go to state 26
+    list                           shift and go to state 39
+    title                          shift and go to state 28
+    box                            shift and go to state 29
+
+state 87
+
+    (27) contentfor -> FOR ( IDENTIFIER , NUMBER . , NUMBER ) { contentgroup }
+
+    ,               shift and go to state 97
+
+
+state 88
+
+    (38) element -> ELEMENT . ( complexstring , STRING ) ;
+
+    (               shift and go to state 98
+
+
+state 89
+
+    (36) elementgroup -> element .
+    (37) elementgroup -> element . elementgroup
+    (36) elementgroup -> . element
+    (37) elementgroup -> . element elementgroup
+    (38) element -> . ELEMENT ( complexstring , STRING ) ;
+
+    }               reduce using rule 36 (elementgroup -> element .)
+    ELEMENT         shift and go to state 88
+
+    elementgroup                   shift and go to state 99
+    element                        shift and go to state 89
+
+state 90
+
+    (35) richtext -> RICHTEXT ( ) { elementgroup . }
+
+    }               shift and go to state 100
+
+
+state 91
+
+    (28) title -> TITLE ( complexstring ) ; .
+
+    TITLE           reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    IMAGE           reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    LIST            reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    FOR             reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    HORIZONTALBOX   reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    VERTICALBOX     reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    TEXT            reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    RICHTEXT        reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+    }               reduce using rule 28 (title -> TITLE ( complexstring ) ; .)
+
+
+state 92
+
+    (26) slidefor -> FOR ( IDENTIFIER , NUMBER . , NUMBER ) { slidegroup }
+
+    ,               shift and go to state 101
+
 
 state 93
 
-    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , . NUMBER ) { slidegroup }
+    (40) textlist -> contenttext .
+    (41) textlist -> contenttext . textlist
+    (40) textlist -> . contenttext
+    (41) textlist -> . contenttext textlist
+    (24) contenttext -> . text
+    (25) contenttext -> . richtext
+    (34) text -> . TEXT ( complexstring ) ;
+    (35) richtext -> . RICHTEXT ( ) { elementgroup }
 
-    NUMBER          shift and go to state 102
+    }               reduce using rule 40 (textlist -> contenttext .)
+    TEXT            shift and go to state 27
+    RICHTEXT        shift and go to state 38
 
+    contenttext                    shift and go to state 93
+    text                           shift and go to state 31
+    textlist                       shift and go to state 102
+    richtext                       shift and go to state 34
 
 state 94
 
-    (27) contentfor -> FOR ( IDENTIFIER , NUMBER , . NUMBER ) { contentgroup }
+    (39) list -> LIST ( STRING ) { textlist . }
 
-    NUMBER          shift and go to state 103
+    }               shift and go to state 103
 
 
 state 95
+
+    (31) horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup . }
+
+    }               shift and go to state 104
+
+
+state 96
+
+    (32) verticalbox -> VERTICALBOX ( NUMBER ) { contentgroup . }
+
+    }               shift and go to state 105
+
+
+state 97
+
+    (27) contentfor -> FOR ( IDENTIFIER , NUMBER , . NUMBER ) { contentgroup }
+
+    NUMBER          shift and go to state 106
+
+
+state 98
 
     (38) element -> ELEMENT ( . complexstring , STRING ) ;
     (42) complexstring -> . contentstring
@@ -1203,13 +1230,20 @@ state 95
     (44) contentstring -> . STRING
     (45) contentstring -> . IDENTIFIER
 
-    STRING          shift and go to state 65
-    IDENTIFIER      shift and go to state 64
+    STRING          shift and go to state 63
+    IDENTIFIER      shift and go to state 60
 
-    contentstring                  shift and go to state 63
-    complexstring                  shift and go to state 104
+    contentstring                  shift and go to state 61
+    complexstring                  shift and go to state 107
 
-state 96
+state 99
+
+    (37) elementgroup -> element elementgroup .
+
+    }               reduce using rule 37 (elementgroup -> element elementgroup .)
+
+
+state 100
 
     (35) richtext -> RICHTEXT ( ) { elementgroup } .
 
@@ -1224,73 +1258,48 @@ state 96
     }               reduce using rule 35 (richtext -> RICHTEXT ( ) { elementgroup } .)
 
 
-state 97
-
-    (37) elementgroup -> element elementgroup .
-
-    }               reduce using rule 37 (elementgroup -> element elementgroup .)
-
-
-state 98
-
-    (32) verticalbox -> VERTICALBOX ( NUMBER ) { contentgroup . }
-
-    }               shift and go to state 105
-
-
-state 99
-
-    (40) textlist -> contenttext .
-    (41) textlist -> contenttext . textlist
-    (40) textlist -> . contenttext
-    (41) textlist -> . contenttext textlist
-    (24) contenttext -> . text
-    (25) contenttext -> . richtext
-    (34) text -> . TEXT ( complexstring ) ;
-    (35) richtext -> . RICHTEXT ( ) { elementgroup }
-
-    }               reduce using rule 40 (textlist -> contenttext .)
-    TEXT            shift and go to state 32
-    RICHTEXT        shift and go to state 30
-
-    contenttext                    shift and go to state 99
-    text                           shift and go to state 25
-    richtext                       shift and go to state 40
-    textlist                       shift and go to state 106
-
-state 100
-
-    (39) list -> LIST ( STRING ) { textlist . }
-
-    }               shift and go to state 107
-
-
 state 101
 
-    (31) horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup . }
+    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , . NUMBER ) { slidegroup }
 
-    }               shift and go to state 108
+    NUMBER          shift and go to state 108
 
 
 state 102
 
-    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER . ) { slidegroup }
+    (41) textlist -> contenttext textlist .
 
-    )               shift and go to state 109
+    }               reduce using rule 41 (textlist -> contenttext textlist .)
 
 
 state 103
 
-    (27) contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER . ) { contentgroup }
+    (39) list -> LIST ( STRING ) { textlist } .
 
-    )               shift and go to state 110
+    TITLE           reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    IMAGE           reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    LIST            reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    FOR             reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    HORIZONTALBOX   reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    VERTICALBOX     reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    TEXT            reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    RICHTEXT        reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    }               reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
 
 
 state 104
 
-    (38) element -> ELEMENT ( complexstring . , STRING ) ;
+    (31) horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .
 
-    ,               shift and go to state 111
+    TITLE           reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    IMAGE           reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    LIST            reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    FOR             reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    HORIZONTALBOX   reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    VERTICALBOX     reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    TEXT            reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    RICHTEXT        reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    }               reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
 
 
 state 105
@@ -1310,80 +1319,47 @@ state 105
 
 state 106
 
-    (41) textlist -> contenttext textlist .
+    (27) contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER . ) { contentgroup }
 
-    }               reduce using rule 41 (textlist -> contenttext textlist .)
+    )               shift and go to state 109
 
 
 state 107
 
-    (39) list -> LIST ( STRING ) { textlist } .
+    (38) element -> ELEMENT ( complexstring . , STRING ) ;
 
-    TITLE           reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
-    IMAGE           reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
-    LIST            reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
-    FOR             reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
-    HORIZONTALBOX   reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
-    VERTICALBOX     reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
-    TEXT            reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
-    RICHTEXT        reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
-    }               reduce using rule 39 (list -> LIST ( STRING ) { textlist } .)
+    ,               shift and go to state 110
 
 
 state 108
 
-    (31) horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .
+    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER . ) { slidegroup }
 
-    TITLE           reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
-    IMAGE           reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
-    LIST            reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
-    FOR             reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
-    HORIZONTALBOX   reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
-    VERTICALBOX     reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
-    TEXT            reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
-    RICHTEXT        reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
-    }               reduce using rule 31 (horizontalbox -> HORIZONTALBOX ( NUMBER ) { contentgroup } .)
+    )               shift and go to state 111
 
 
 state 109
 
-    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) . { slidegroup }
+    (27) contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) . { contentgroup }
 
     {               shift and go to state 112
 
 
 state 110
 
-    (27) contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) . { contentgroup }
+    (38) element -> ELEMENT ( complexstring , . STRING ) ;
 
-    {               shift and go to state 113
+    STRING          shift and go to state 113
 
 
 state 111
 
-    (38) element -> ELEMENT ( complexstring , . STRING ) ;
+    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) . { slidegroup }
 
-    STRING          shift and go to state 114
+    {               shift and go to state 114
 
 
 state 112
-
-    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { . slidegroup }
-    (11) slidegroup -> . slide
-    (12) slidegroup -> . slidefor
-    (13) slidegroup -> . slide slidegroup
-    (14) slidegroup -> . slidefor slidegroup
-    (15) slide -> . SLIDE ( params ) { contentgroup }
-    (26) slidefor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
-
-    SLIDE           shift and go to state 5
-    FOR             shift and go to state 23
-
-    slide                          shift and go to state 24
-    slidegroup                     shift and go to state 115
-    slidefor                       shift and go to state 21
-
-state 113
 
     (27) contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { . contentgroup }
     (16) contentgroup -> . content
@@ -1407,66 +1383,74 @@ state 113
     (34) text -> . TEXT ( complexstring ) ;
     (35) richtext -> . RICHTEXT ( ) { elementgroup }
 
-    TITLE           shift and go to state 31
-    IMAGE           shift and go to state 34
-    LIST            shift and go to state 38
-    FOR             shift and go to state 29
-    HORIZONTALBOX   shift and go to state 39
-    VERTICALBOX     shift and go to state 33
-    TEXT            shift and go to state 32
-    RICHTEXT        shift and go to state 30
+    TITLE           shift and go to state 40
+    IMAGE           shift and go to state 32
+    LIST            shift and go to state 24
+    FOR             shift and go to state 37
+    HORIZONTALBOX   shift and go to state 35
+    VERTICALBOX     shift and go to state 36
+    TEXT            shift and go to state 27
+    RICHTEXT        shift and go to state 38
 
-    content                        shift and go to state 36
-    contenttext                    shift and go to state 37
-    text                           shift and go to state 25
-    box                            shift and go to state 26
-    image                          shift and go to state 27
-    verticalbox                    shift and go to state 28
-    contentfor                     shift and go to state 41
-    horizontalbox                  shift and go to state 44
-    title                          shift and go to state 42
-    richtext                       shift and go to state 40
-    list                           shift and go to state 43
-    contentgroup                   shift and go to state 116
+    content                        shift and go to state 30
+    contenttext                    shift and go to state 21
+    text                           shift and go to state 31
+    image                          shift and go to state 23
+    contentfor                     shift and go to state 33
+    richtext                       shift and go to state 34
+    contentgroup                   shift and go to state 115
+    verticalbox                    shift and go to state 25
+    horizontalbox                  shift and go to state 26
+    list                           shift and go to state 39
+    title                          shift and go to state 28
+    box                            shift and go to state 29
 
-state 114
+state 113
 
     (38) element -> ELEMENT ( complexstring , STRING . ) ;
 
-    )               shift and go to state 117
+    )               shift and go to state 116
 
+
+state 114
+
+    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { . slidegroup }
+    (11) slidegroup -> . slide
+    (12) slidegroup -> . slidefor
+    (13) slidegroup -> . slide slidegroup
+    (14) slidegroup -> . slidefor slidegroup
+    (15) slide -> . SLIDE ( params ) { contentgroup }
+    (26) slidefor -> . FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup }
+
+    SLIDE           shift and go to state 3
+    FOR             shift and go to state 44
+
+    slide                          shift and go to state 43
+    slidegroup                     shift and go to state 117
+    slidefor                       shift and go to state 41
 
 state 115
 
-    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup . }
+    (27) contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { contentgroup . }
 
     }               shift and go to state 118
 
 
 state 116
 
-    (27) contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { contentgroup . }
+    (38) element -> ELEMENT ( complexstring , STRING ) . ;
 
-    }               shift and go to state 119
+    ;               shift and go to state 119
 
 
 state 117
 
-    (38) element -> ELEMENT ( complexstring , STRING ) . ;
+    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup . }
 
-    ;               shift and go to state 120
+    }               shift and go to state 120
 
 
 state 118
-
-    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup } .
-
-    SLIDE           reduce using rule 26 (slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup } .)
-    FOR             reduce using rule 26 (slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup } .)
-    }               reduce using rule 26 (slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup } .)
-
-
-state 119
 
     (27) contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { contentgroup } .
 
@@ -1481,10 +1465,19 @@ state 119
     }               reduce using rule 27 (contentfor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { contentgroup } .)
 
 
-state 120
+state 119
 
     (38) element -> ELEMENT ( complexstring , STRING ) ; .
 
     ELEMENT         reduce using rule 38 (element -> ELEMENT ( complexstring , STRING ) ; .)
     }               reduce using rule 38 (element -> ELEMENT ( complexstring , STRING ) ; .)
+
+
+state 120
+
+    (26) slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup } .
+
+    SLIDE           reduce using rule 26 (slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup } .)
+    FOR             reduce using rule 26 (slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup } .)
+    }               reduce using rule 26 (slidefor -> FOR ( IDENTIFIER , NUMBER , NUMBER ) { slidegroup } .)
 

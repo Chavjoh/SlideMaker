@@ -125,8 +125,12 @@ def p_elementgroup_recursive(p):
 	p[0] = [p[1]] + p[2]
 
 def p_element(p):
-	''' element : ELEMENT '(' complexstring ',' STRING ')' ';' '''
-	p[0] = AST.ElementNode([p[3], AST.StringNode(p[5])])
+	''' element : ELEMENT '(' complexstring ',' STRING ')' ';'
+		| ELEMENT '(' complexstring ')' ';' '''
+	if len(p) < 8:
+		p[0] = AST.ElementNode(p[3]);
+	else:
+		p[0] = AST.ElementNode([p[3], AST.StringNode(p[5])])
 
 def p_list(p):
 	''' list : LIST '(' STRING ')' '{' textlist '}' '''

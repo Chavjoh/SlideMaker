@@ -147,7 +147,8 @@ def assemble(self):
 def assemble(self):
 	self.html = ""
 	self.html += "<span style=\""
-	self.html += self.children[1].assemble().replace(',',';')
+	if len(self.children) > 1:
+		self.html += self.children[1].assemble().replace(',',';')
 	self.html += "\">"
 	self.html += self.children[0].assemble()
 	self.html += "</span>\n"

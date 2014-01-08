@@ -224,7 +224,7 @@ Group("Layouts", "background:#350031")
 	}
 }
 
-Group("Advanced aspects", "background:#452500");
+Group("Advanced aspects", "background:#452500")
 {
 	Slide()
 	{
@@ -265,7 +265,7 @@ Group("Advanced aspects", "background:#452500");
 			Element(" tag is used to generate a data table from a CSV file.");
 		}
 		Text("The example below comes from a CSV file providen with this slideshow.");
-		Table("data/presentation.csv", "col-start:3, col-count:4, row-start:2, row-count:3");
+		Table("compile/data/presentation.csv", "col-start:3, col-count:4, row-start:2, row-count:3");
 		RichText()
 		{
 			Element("Use the ");

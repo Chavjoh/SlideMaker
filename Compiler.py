@@ -311,7 +311,7 @@ if __name__ == "__main__":
 	prog = open(sys.argv[1]).read()
 	ast = parse(prog)
 	assembled = ast.assemble()
-	name = os.path.splitext(sys.argv[1])[0]+'.html'
+	name = 'compile/' + os.path.basename(os.path.splitext(sys.argv[1])[0]) + '.html'
 	outfile = open(name, 'w')
 	outfile.write(assembled)
 	outfile.close()

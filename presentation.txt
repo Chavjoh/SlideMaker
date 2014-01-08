@@ -1,80 +1,95 @@
 Slide("background:#440000")
 {
-	Title("SlideMaker");
-	Text("A simple slides generator for Reveal");
-	Text("By Dany Jupille, Jason Racine & Johan Chavaillaz");
-	RichText()
+	VerticalBox()
 	{
-		Element("Use the ");
-		Element("right key", "color:#EE1100");
-		Element(" to proceed.");
+		Title("SlideMaker");
+		Text("A simple slides generator for Reveal");
+		Text("By Dany Jupille, Jason Racine & Johan Chavaillaz");
+		RichText()
+		{
+			Element("Use the ");
+			Element("right key", "color:#EE1100");
+			Element(" to proceed.");
+		}
+		Image("img/red_arrow_right.png");
 	}
-	Image("img/red_arrow_right.png");
 }
 
 Slide("background:#333333")
 {
-	Title("What is Reveal ?");
-	RichText()
+	VerticalBox()
 	{
-		Element("A framework for incredible ");
-		Element("HTML5", "color:#EE1100");
-		Element(" slideshows including");
+		Title("What is Reveal ?");
+		RichText()
+		{
+			Element("A framework for incredible ");
+			Element("HTML5", "color:#EE1100");
+			Element(" slideshows including");
+		}
+		List("unordered")
+		{
+			Text("Automatic 2-dimensionnal navigation system");
+			Text("Large set of transition effects");
+			Text("Ability to customize everything");
+		}
+		Text("This presentation actually uses Reveal.");
 	}
-	List("unordered")
-	{
-		Text("Automatic 2-dimensionnal navigation system");
-		Text("Large set of transition effects");
-		Text("Ability to customize everything");
-	}
-	Text("This presentation actually uses Reveal.");
 }
 
 Slide("background:#333333")
 {
-	Title("What is SlideMaker ?");
-	RichText()
+	VerticalBox()
 	{
-		Element("A ");
-		Element("generator", "color:#EE1100");
-		Element(" to use with Reveal");
+		Title("What is SlideMaker ?");
+		RichText()
+		{
+			Element("A ");
+			Element("generator", "color:#EE1100");
+			Element(" to use with Reveal");
+		}
+		List("unordered")
+		{
+			Text("Simple-to-understand syntax");
+			Text("Lightweight python compilation");
+			Text("Management of external data sources");
+		}
+		Text("... and many other things !");
 	}
-	List("unordered")
-	{
-		Text("Simple-to-understand syntax");
-		Text("Lightweight python compilation");
-		Text("Management of external data sources");
-	}
-	Text("... and many other things !");
 }
 
 Group("Basics", "background:#000b5c")
 {
 	Slide()
 	{
-		Title("Structure of a slideshow");
-		Text("A slideshow is made of groups and slides.");
-		Image("img/diag_slideshow.png");
-		RichText()
+		VerticalBox()
 		{
-			Element("Use the ");
-			Element("down key", "color:#EE1100");
-			Element(" to proceed.");
+			Title("Structure of a slideshow");
+			Text("A slideshow is made of groups and slides.");
+			Image("img/diag_slideshow.png");
+			RichText()
+			{
+				Element("Use the ");
+				Element("down key", "color:#EE1100");
+				Element(" to proceed.");
+			}
+			Image("img/red_arrow_down.png");
 		}
-		Image("img/red_arrow_down.png");
 	}
 
 	Slide()
 	{
-		Text("You just went down through 2 slides inside of the same group.");
-		Text("When inside a group, the down key is used to go through its slides.");
-		Text("The right key can be used to go to the next top-level element.");
-		RichText()
+		VerticalBox()
 		{
-			Element("Continue with the ");
-			Element("right key", "color:#EE1100");
+			Text("You just went down through 2 slides inside of the same group.");
+			Text("When inside a group, the down key is used to go through its slides.");
+			Text("The right key can be used to go to the next top-level element.");
+			RichText()
+			{
+				Element("Continue with the ");
+				Element("right key", "color:#EE1100");
+			}
+			Image("img/red_arrow_right.png");
 		}
-		Image("img/red_arrow_right.png");
 	}
 }
 
@@ -82,95 +97,107 @@ Group("Texts", "background:#003502")
 {
 	Slide()
 	{
-		Title("Displaying simple text");
-		RichText()
+		VerticalBox()
 		{
-			Element("The ");
-			Element("Text", "color:#EE1100");
-			Element(" tag is used to display a simple paragraph.");
-		}
-		RichText()
-		{
-			Element("Use the ");
-			Element("down key", "color:#EE1100");
-			Element(" to go through all the slides of this group.");
-		}
-		Image("img/red_arrow_down.png");
-	}
-
-	Slide()
-	{
-		Title("Displaying rich text");
-		RichText()
-		{
-			Element("The ");
-			Element("RichText", "color:#EE1100");
-			Element(" and ");
-			Element("Element", "color:#EE1100");
-			Element(" tags are used to display formatted text.");
-		}
-		Text("This method enables you to format your text using all common CSS properties");
-		List("unordered")
-		{
-			Text("Colors");
-			Text("Decorations");
-			Text("Fonts");
-			Text("...");
-		}
-	}
-
-	Slide()
-	{
-		Title("Displaying a slide title");
-		RichText()
-		{
-			Element("The ");
-			Element("Title", "color:#EE1100");
-			Element(" tag is used to display a title like above.");
-		}
-		Text("This title only appears on its slide.");
-		RichText()
-		{
-			Element("To define a title like ");
-			Element("Texts", "color:#EE1100");
-			Element(" in the corner of this slide, put him in argument of the ");
-			Element("Group", "color:#EE1100");
-			Element(" tag.");
-		}
-	}
-
-	Slide()
-	{
-		Title("Making lists");
-		RichText()
-		{
-			Element("The ");
-			Element("List", "color:#EE1100");
-			Element(" tag is used to display a list of items.");
-		}
-		Text("A list can be ordered or not.");
-		HorizontalBox(20)
-		{
-			List("ordered")
+			Title("Displaying simple text");
+			RichText()
 			{
-				Text("This is an");
-				Text("ordered");
-				Text("list");
+				Element("The ");
+				Element("Text", "color:#EE1100");
+				Element(" tag is used to display a simple paragraph.");
 			}
+			RichText()
+			{
+				Element("Use the ");
+				Element("down key", "color:#EE1100");
+				Element(" to go through all the slides of this group.");
+			}
+			Image("img/red_arrow_down.png");
+		}
+	}
+
+	Slide()
+	{
+		VerticalBox()
+		{
+			Title("Displaying rich text");
+			RichText()
+			{
+				Element("The ");
+				Element("RichText", "color:#EE1100");
+				Element(" and ");
+				Element("Element", "color:#EE1100");
+				Element(" tags are used to display formatted text.");
+			}
+			Text("This method enables you to format your text using all common CSS properties");
 			List("unordered")
 			{
-				Text("This is an");
-				Text("unordered");
-				Text("list");
+				Text("Colors");
+				Text("Decorations");
+				Text("Fonts");
+				Text("...");
 			}
 		}
-		RichText()
+	}
+
+	Slide()
+	{
+		VerticalBox()
 		{
-			Element("Use the ");
-			Element("right key", "color:#EE1100");
-			Element(" to continue to the next group");
+			Title("Displaying a slide title");
+			RichText()
+			{
+				Element("The ");
+				Element("Title", "color:#EE1100");
+				Element(" tag is used to display a title like above.");
+			}
+			Text("This title only appears on its slide.");
+			RichText()
+			{
+				Element("To define a title like ");
+				Element("Texts", "color:#EE1100");
+				Element(" in the corner of this slide, put him in argument of the ");
+				Element("Group", "color:#EE1100");
+				Element(" tag.");
+			}
 		}
-		Image("img/red_arrow_right.png");
+	}
+
+	Slide()
+	{
+		VerticalBox()
+		{
+			Title("Making lists");
+			RichText()
+			{
+				Element("The ");
+				Element("List", "color:#EE1100");
+				Element(" tag is used to display a list of items.");
+			}
+			Text("A list can be ordered or not.");
+			HorizontalBox(20)
+			{
+				List("ordered")
+				{
+					Text("This is an");
+					Text("ordered");
+					Text("list");
+				}
+				List("unordered")
+				{
+					Text("This is an");
+					Text("unordered");
+					Text("list");
+				}
+			}
+			RichText()
+			{
+				Element("Use the ");
+				Element("right key", "color:#EE1100");
+				Element(" to continue to the next group");
+			}
+			Image("img/red_arrow_right.png");
+		}
 	}
 }
 
@@ -178,49 +205,58 @@ Group("Layouts", "background:#350031")
 {
 	Slide()
 	{
-		Title("Arranging elements");
-		Text("The boxes system allows you to arrange elements horizontally and vertically.");
-		Image("img/diag_layouts.png");
-		RichText()
+		VerticalBox()
 		{
-			Element("Use the ");
-			Element("down key", "color:#EE1100");
-			Element(" to go through all the slides of this group.");
+			Title("Arranging elements");
+			Text("The boxes system allows you to arrange elements horizontally and vertically.");
+			Image("img/diag_layouts.png");
+			RichText()
+			{
+				Element("Use the ");
+				Element("down key", "color:#EE1100");
+				Element(" to go through all the slides of this group.");
+			}
+			Image("img/red_arrow_down.png");
 		}
-		Image("img/red_arrow_down.png");
 	}
 
 	Slide()
 	{
-		Title("Horizontal boxes");
-		RichText()
+		VerticalBox()
 		{
-			Element("The ");
-			Element("HorizontalBox", "color:#EE1100");
-			Element(" tag is used to display elements horizontally.");
+			Title("Horizontal boxes");
+			RichText()
+			{
+				Element("The ");
+				Element("HorizontalBox", "color:#EE1100");
+				Element(" tag is used to display elements horizontally.");
+			}
+			Text("By default, elements are stacked vertically.");
+			Text("Horizontal box allows you to stack some elements side by side.");
 		}
-		Text("By default, elements are stacked vertically.");
-		Text("Horizontal box allows you to stack some elements side by side.");
 	}
 
 	Slide()
 	{
-		Title("Vertical boxes");
-		RichText()
+		VerticalBox()
 		{
-			Element("The ");
-			Element("VerticalBox", "color:#EE1100");
-			Element(" tag is used to display elements vertically.");
+			Title("Vertical boxes");
+			RichText()
+			{
+				Element("The ");
+				Element("VerticalBox", "color:#EE1100");
+				Element(" tag is used to display elements vertically.");
+			}
+			Text("By default, elements are already stacked vertically.");
+			Text("This tag could be useful for its setting, which permit to define a margin between stacked elements.");
+			RichText()
+			{
+				Element("Use the ");
+				Element("right key", "color:#EE1100");
+				Element(" to continue to the next group");
+			}
+			Image("img/red_arrow_right.png");
 		}
-		Text("By default, elements are already stacked vertically.");
-		Text("This tag could be useful for its setting, which permit to define a margin between stacked elements.");
-		RichText()
-		{
-			Element("Use the ");
-			Element("right key", "color:#EE1100");
-			Element(" to continue to the next group");
-		}
-		Image("img/red_arrow_right.png");
 	}
 }
 
@@ -228,58 +264,67 @@ Group("Advanced aspects", "background:#452500")
 {
 	Slide()
 	{
-		Title("Making loops");
-		RichText()
+		VerticalBox()
 		{
-			Element("The ");
-			Element("For", "color:#EE1100");
-			Element(" tag is used to repeat some elements.");
-		}
-		Text("Slides, texts and other elements can be generated in batches.");
-		Text("The list below is generated by a 3-times looping generation.");
-		For(i,1,3)
-		{
+			Title("Making loops");
 			RichText()
 			{
-				Element("This line is the #");
-				Element(i, "color:#EE1100");
-				Element(" generated by the loop");
+				Element("The ");
+				Element("For", "color:#EE1100");
+				Element(" tag is used to repeat some elements.");
 			}
+			Text("Slides, texts and other elements can be generated in batches.");
+			Text("The list below is generated by a 3-times looping generation.");
+			For(i,1,3)
+			{
+				RichText()
+				{
+					Element("This line is the #");
+					Element(i, "color:#EE1100");
+					Element(" generated by the loop");
+				}
+			}
+			RichText()
+			{
+				Element("Use the ");
+				Element("down key", "color:#EE1100");
+				Element(" to go through all the slides of this group.");
+			}
+			Image("img/red_arrow_down.png");
 		}
-		RichText()
-		{
-			Element("Use the ");
-			Element("down key", "color:#EE1100");
-			Element(" to go through all the slides of this group.");
-		}
-		Image("img/red_arrow_down.png");
 	}
 
 	Slide()
 	{
-		Title("Using external data sources");
-		RichText()
+		VerticalBox()
 		{
-			Element("The ");
-			Element("Table", "color:#EE1100");
-			Element(" tag is used to generate a data table from a CSV file.");
+			Title("Using external data sources");
+			RichText()
+			{
+				Element("The ");
+				Element("Table", "color:#EE1100");
+				Element(" tag is used to generate a data table from a CSV file.");
+			}
+			Text("The example below comes from a CSV file providen with this slideshow.");
+			Table("compile/data/presentation.csv", "col-start:3, col-count:4, row-start:2, row-count:3");
+			RichText()
+			{
+				Element("Use the ");
+				Element("right key", "color:#EE1100");
+				Element(" to continue to the next group");
+			}
+			Image("img/red_arrow_right.png");
 		}
-		Text("The example below comes from a CSV file providen with this slideshow.");
-		Table("compile/data/presentation.csv", "col-start:3, col-count:4, row-start:2, row-count:3");
-		RichText()
-		{
-			Element("Use the ");
-			Element("right key", "color:#EE1100");
-			Element(" to continue to the next group");
-		}
-		Image("img/red_arrow_right.png");
 	}
 }
 
 Slide("background:#440000")
 {
-	Title("Finally");
-	Text("We recommand you to consult the complete documentation of SlideMaker.");
-	Text("You can also test the providen examples, and read the source code for better understanding.");
-	Title("Thank you !");
+	VerticalBox()
+	{
+		Title("Finally");
+		Text("We recommand you to consult the complete documentation of SlideMaker.");
+		Text("You can also test the providen examples, and read the source code for better understanding.");
+		Title("Thank you !");
+	}
 }

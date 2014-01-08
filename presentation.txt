@@ -1,6 +1,6 @@
 Slide("background:#440000")
 {
-	VerticalBox()
+	VerticalBox(0)
 	{
 		Title("SlideMaker");
 		Text("A simple slides generator for Reveal");
@@ -17,7 +17,7 @@ Slide("background:#440000")
 
 Slide("background:#333333")
 {
-	VerticalBox()
+	VerticalBox(0)
 	{
 		Title("What is Reveal ?");
 		RichText()
@@ -38,7 +38,7 @@ Slide("background:#333333")
 
 Slide("background:#333333")
 {
-	VerticalBox()
+	VerticalBox(0)
 	{
 		Title("What is SlideMaker ?");
 		RichText()
@@ -61,7 +61,7 @@ Group("Basics", "background:#000b5c")
 {
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Structure of a slideshow");
 			Text("A slideshow is made of groups and slides.");
@@ -78,7 +78,7 @@ Group("Basics", "background:#000b5c")
 
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Text("You just went down through 2 slides inside of the same group.");
 			Text("When inside a group, the down key is used to go through its slides.");
@@ -97,7 +97,7 @@ Group("Texts", "background:#003502")
 {
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Displaying simple text");
 			RichText()
@@ -118,7 +118,7 @@ Group("Texts", "background:#003502")
 
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Displaying rich text");
 			RichText()
@@ -142,7 +142,7 @@ Group("Texts", "background:#003502")
 
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Displaying a slide title");
 			RichText()
@@ -165,7 +165,7 @@ Group("Texts", "background:#003502")
 
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Making lists");
 			RichText()
@@ -205,7 +205,7 @@ Group("Layouts", "background:#350031")
 {
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Arranging elements");
 			Text("The boxes system allows you to arrange elements horizontally and vertically.");
@@ -222,7 +222,7 @@ Group("Layouts", "background:#350031")
 
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Horizontal boxes");
 			RichText()
@@ -238,7 +238,7 @@ Group("Layouts", "background:#350031")
 
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Vertical boxes");
 			RichText()
@@ -264,7 +264,7 @@ Group("Advanced aspects", "background:#452500")
 {
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Making loops");
 			RichText()
@@ -296,7 +296,7 @@ Group("Advanced aspects", "background:#452500")
 
 	Slide()
 	{
-		VerticalBox()
+		VerticalBox(0)
 		{
 			Title("Using external data sources");
 			RichText()
@@ -320,7 +320,7 @@ Group("Advanced aspects", "background:#452500")
 
 Slide("background:#440000")
 {
-	VerticalBox()
+	VerticalBox(0)
 	{
 		Title("Finally");
 		Text("We recommand you to consult the complete documentation of SlideMaker.");

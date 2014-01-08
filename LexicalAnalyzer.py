@@ -97,7 +97,7 @@ def t_NUMBER(t):
 	return t
 
 def t_STRING(t):
-	r'"((\\\\")|[^"\r\n])*"'
+	r'"((\\")|[^"\r\n])*"'
 	return t
 
 def t_IDENTIFIER(t):

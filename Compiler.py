@@ -195,7 +195,11 @@ def assemble(self):
 ######################################################################
 @addToClass(AST.StringNode)
 def assemble(self):
-	return self.tok[1:-1]
+	cleaned_string = self.tok[1:-1]
+
+	cleaned_string = cleaned_string.replace("\\\"", "\"");
+
+	return cleaned_string
 
 ######################################################################
 #                            ComplexStringNode                       #
@@ -234,6 +238,7 @@ def assemble(self):
 		vars[str(self.children[0].tok)] = i
 		for c in self.children[3:]:
 			self.html += c.assemble()
+	vars.pop(str(self.children[0].tok), None)
 	return self.html
 
 ######################################################################

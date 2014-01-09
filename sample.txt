@@ -9,7 +9,7 @@
 			RichText()
 			{
 				Element("This", "color: #ff0000");
-				Element("is", "color: #00ff00, decoration: underline");
+				Element("is", "color: #00ff00, text-decoration: underline");
 				Element("an element", "color: #0000ff");
 			}
 			HorizontalBox(30)
@@ -20,7 +20,7 @@
 					RichText()
 					{
 						Element("This is", "color: #ff0000");
-						Element("for test", "color: #00ff00, decoration: underline");
+						Element("for test", "color: #00ff00, text-decoration: underline");
 						Element("only !", "color: #0000ff");
 					}
 					Text("Element 3");
@@ -37,7 +37,7 @@
 			RichText()
 			{
 				Element("This is an", "color: #ff0000");
-				Element("other", "color: #00ff00, decoration: underline");
+				Element("other", "color: #00ff00, text-decoration: underline");
 				Element("element", "color: #0000ff");
 			}
 			HorizontalBox(30)
@@ -48,7 +48,7 @@
 					RichText()
 					{
 						Element("This is", "color: #ff0000");
-						Element("for test", "color: #00ff00, decoration: underline");
+						Element("for test", "color: #00ff00, text-decoration: underline");
 						Element("only !", "color: #0000ff");
 					}
 					Text("Element 3");

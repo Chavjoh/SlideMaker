@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Changeme</title>
-        <meta name="description" content="Changeme">
-        <meta name="author" content="Changeme">
+        <title>Presentation</title>
+        <meta name="description" content="SlideMaker presentation">
+        <meta name="author" content="SlideMaker">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">

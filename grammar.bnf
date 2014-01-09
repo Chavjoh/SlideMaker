@@ -1,4 +1,3 @@
-
 program ::= (group | slideGroup)+
 
 	group ::= 'Group(' title (',' style)? ')' '{' slideGroup '}'
@@ -18,7 +17,7 @@ program ::= (group | slideGroup)+
 			end ::= NUMBER
 
 
-		slide ::= 'Slide(' style ')' '{' contentGroup '}'
+		slide ::= 'Slide(' (style)? ')' '{' contentGroup '}'
 
 
 complexString ::= STRING ('+' STRING)* | IDENTIFIER
@@ -49,7 +48,7 @@ contentGroup ::= (title | box | image | content | list | contentFor)*
 
 		contentList ::= contentGroup+
 
-		orderType ::= 'Order' | 'Unorder'
+		orderType ::= 'ordered' | 'unordered'
 
 	contentFor ::= 'For (' identifier ',' begin ',' end ')' '{' content '}'
 

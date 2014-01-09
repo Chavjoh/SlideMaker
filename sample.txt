@@ -1,65 +1,65 @@
-Group("Titre de la section", "background: #00ff00")
+ï»¿Group("Section title", "background: #00ff00")
 {
-	// Ceci est un commentaire
+	// First slide
 	Slide("transition: linear, background: #abcdef")
 	{
 		VerticalBox(20)
 		{
-			Title("Mon titre autre");
+			Title("First slide");
 			RichText()
 			{
-				Element("Elé", "color: #ff0000");
-				Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
-				Element("2", "color: #0000ff");
+				Element("This", "color: #ff0000");
+				Element("is", "color: #00ff00, decoration: underline");
+				Element("an element", "color: #0000ff");
 			}
 			HorizontalBox(30)
 			{
 				List("unordered")
 				{
-					Text("Elément 1");
+					Text("Element 1");
 					RichText()
 					{
-						Element("Elé", "color: #ff0000");
-						Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
-						Element("2", "color: #0000ff");
+						Element("This is", "color: #ff0000");
+						Element("for test", "color: #00ff00, decoration: underline");
+						Element("only !", "color: #0000ff");
 					}
-					Text("Elément; 3");
+					Text("Element 3");
 				}
 			}
 		}
 	}
-	// Ceci est un commentaire
+	
 	Slide("transition: linear, background: #abcdef")
 	{
 		VerticalBox(20)
 		{
-			Title("Mon titre autre");
+			Title("Second slide");
 			RichText()
 			{
-				Element("Elé", "color: #ff0000");
-				Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
-				Element("2", "color: #0000ff");
+				Element("This is an", "color: #ff0000");
+				Element("other", "color: #00ff00, decoration: underline");
+				Element("element", "color: #0000ff");
 			}
 			HorizontalBox(30)
 			{
-				List("unordered")
+				List("ordered")
 				{
-					Text("Elément 1");
+					Text("Element 1");
 					RichText()
 					{
-						Element("Elé", "color: #ff0000");
-						Element("Clique si tu t'emmer", "color: #00ff00, decoration: underline");
-						Element("2", "color: #0000ff");
+						Element("This is", "color: #ff0000");
+						Element("for test", "color: #00ff00, decoration: underline");
+						Element("only !", "color: #0000ff");
 					}
-					Text("Elément; 3");
+					Text("Element 3");
 				}
 			}
 		}
 	}
 
 	/*
-	 * Ceci est un commentaire sur plusieurs lignes
-	 * Et ci-dessous une boucle génératrice de slides multiples
+	 * This is a multi-line comment
+	 * And below generating multiple loop slides
 	 */
 	For (i, 1, 5)
 	{
@@ -67,5 +67,10 @@ Group("Titre de la section", "background: #00ff00")
 		{
 			Image("img" + i + ".png");
 		}
+	}
+
+	Slide()
+	{
+		Table("data.csv", "col-start:3, col-count:4, row-start:2, row-count:6");
 	}
 }

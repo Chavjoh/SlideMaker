@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Presentation</title>
+        <meta name="description" content="SlideMaker presentation">
+        <meta name="author" content="SlideMaker">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+<section data-background="#440000">
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>SlideMaker</h3>
+</td></tr>
+<tr><td>A simple slides generator for Reveal
+</td></tr>
+<tr><td>By Dany Jupille, Jason Racine & Johan Chavaillaz
+</td></tr>
+<tr><td><span style="">Use the </span>
+<span style="color:#EE1100">right key</span>
+<span style=""> to proceed.</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_right.png" />
+</td></tr>
+</table>
+
+</section>
+<section data-background="#333333">
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>What is Reveal ?</h3>
+</td></tr>
+<tr><td><span style="">A framework for incredible </span>
+<span style="color:#EE1100">HTML5</span>
+<span style=""> slideshows including</span>
+</td></tr>
+<tr><td><ul>
+<li>Automatic 2-dimensionnal navigation system
+</li>
+<li>Large set of transition effects
+</li>
+<li>Ability to customize everything
+</li>
+</ul>
+</td></tr>
+<tr><td>This presentation actually uses Reveal.
+</td></tr>
+</table>
+
+</section>
+<section data-background="#333333">
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>What is SlideMaker ?</h3>
+</td></tr>
+<tr><td><span style="">A </span>
+<span style="color:#EE1100">generator</span>
+<span style=""> to use with Reveal</span>
+</td></tr>
+<tr><td><ul>
+<li>Simple-to-understand syntax
+</li>
+<li>Lightweight python compilation
+</li>
+<li>Management of external data sources
+</li>
+</ul>
+</td></tr>
+<tr><td>... and many other things !
+</td></tr>
+</table>
+
+</section>
+<section data-background="#000b5c">
+<div class="sectiontitle">Basics</div>
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Structure of a slideshow</h3>
+</td></tr>
+<tr><td>A slideshow is made of groups and slides.
+</td></tr>
+<tr><td><img src="img/diag_slideshow.png" />
+</td></tr>
+<tr><td><span style="">Use the </span>
+<span style="color:#EE1100">down key</span>
+<span style=""> to proceed.</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_down.png" />
+</td></tr>
+</table>
+
+</section>
+
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td>You just went down through 2 slides inside of the same group.
+</td></tr>
+<tr><td>When inside a group, the down key is used to go through its slides.
+</td></tr>
+<tr><td>The right key can be used to go to the next top-level element.
+</td></tr>
+<tr><td><span style="">Continue with the </span>
+<span style="color:#EE1100">right key</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_right.png" />
+</td></tr>
+</table>
+
+</section>
+
+</section>
+<section data-background="#003502">
+<div class="sectiontitle">Texts</div>
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Displaying simple text</h3>
+</td></tr>
+<tr><td><span style="">The </span>
+<span style="color:#EE1100">Text</span>
+<span style=""> tag is used to display a simple paragraph.</span>
+</td></tr>
+<tr><td><span style="">Use the </span>
+<span style="color:#EE1100">down key</span>
+<span style=""> to go through all the slides of this group.</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_down.png" />
+</td></tr>
+</table>
+
+</section>
+
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Displaying rich text</h3>
+</td></tr>
+<tr><td><span style="">The </span>
+<span style="color:#EE1100">RichText</span>
+<span style=""> and </span>
+<span style="color:#EE1100">Element</span>
+<span style=""> tags are used to display formatted text.</span>
+</td></tr>
+<tr><td>This method enables you to format your text using all common CSS properties
+</td></tr>
+<tr><td><ul>
+<li>Colors
+</li>
+<li>Decorations
+</li>
+<li>Fonts
+</li>
+<li>...
+</li>
+</ul>
+</td></tr>
+</table>
+
+</section>
+
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Displaying a slide title</h3>
+</td></tr>
+<tr><td><span style="">The </span>
+<span style="color:#EE1100">Title</span>
+<span style=""> tag is used to display a title like above.</span>
+</td></tr>
+<tr><td>This title only appears on its slide.
+</td></tr>
+<tr><td><span style="">To define a title like </span>
+<span style="color:#EE1100">Texts</span>
+<span style=""> in the corner of this slide, put him in argument of the </span>
+<span style="color:#EE1100">Group</span>
+<span style=""> tag.</span>
+</td></tr>
+</table>
+
+</section>
+
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Making lists</h3>
+</td></tr>
+<tr><td><span style="">The </span>
+<span style="color:#EE1100">List</span>
+<span style=""> tag is used to display a list of items.</span>
+</td></tr>
+<tr><td>A list can be ordered or not.
+</td></tr>
+<tr><td><table cellpadding="0" border="0" cellspacing="20">
+<tr>
+<td><ol>
+<li>This is an
+</li>
+<li>ordered
+</li>
+<li>list
+</li>
+</ol>
+</td>
+<td><ul>
+<li>This is an
+</li>
+<li>unordered
+</li>
+<li>list
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</td></tr>
+<tr><td><span style="">Use the </span>
+<span style="color:#EE1100">right key</span>
+<span style=""> to continue to the next group</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_right.png" />
+</td></tr>
+</table>
+
+</section>
+
+</section>
+<section data-background="#350031">
+<div class="sectiontitle">Layouts</div>
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Arranging elements</h3>
+</td></tr>
+<tr><td>The boxes system allows you to arrange elements horizontally and vertically.
+</td></tr>
+<tr><td><img src="img/diag_layouts.png" />
+</td></tr>
+<tr><td><span style="">Use the </span>
+<span style="color:#EE1100">down key</span>
+<span style=""> to go through all the slides of this group.</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_down.png" />
+</td></tr>
+</table>
+
+</section>
+
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Horizontal boxes</h3>
+</td></tr>
+<tr><td><span style="">The </span>
+<span style="color:#EE1100">HorizontalBox</span>
+<span style=""> tag is used to display elements horizontally.</span>
+</td></tr>
+<tr><td>By default, elements are stacked vertically.
+</td></tr>
+<tr><td>Horizontal box allows you to stack some elements side by side.
+</td></tr>
+</table>
+
+</section>
+
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Vertical boxes</h3>
+</td></tr>
+<tr><td><span style="">The </span>
+<span style="color:#EE1100">VerticalBox</span>
+<span style=""> tag is used to display elements vertically.</span>
+</td></tr>
+<tr><td>By default, elements are already stacked vertically.
+</td></tr>
+<tr><td>This tag could be useful for its setting, which permit to define a margin between stacked elements.
+</td></tr>
+<tr><td><span style="">Use the </span>
+<span style="color:#EE1100">right key</span>
+<span style=""> to continue to the next group</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_right.png" />
+</td></tr>
+</table>
+
+</section>
+
+</section>
+<section data-background="#452500">
+<div class="sectiontitle">Advanced aspects</div>
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Making loops</h3>
+</td></tr>
+<tr><td><span style="">The </span>
+<span style="color:#EE1100">For</span>
+<span style=""> tag is used to repeat some elements.</span>
+</td></tr>
+<tr><td>Slides, texts and other elements can be generated in batches.
+</td></tr>
+<tr><td>The list below is generated by a 3-times looping generation.
+</td></tr>
+<tr><td><table cellpadding="0" border="0" cellspacing="0">
+<tr><td><span style="">This line is the #</span>
+<span style="color:#EE1100">1</span>
+<span style=""> generated by the loop</span>
+</td></tr>
+</table>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><span style="">This line is the #</span>
+<span style="color:#EE1100">2</span>
+<span style=""> generated by the loop</span>
+</td></tr>
+</table>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><span style="">This line is the #</span>
+<span style="color:#EE1100">3</span>
+<span style=""> generated by the loop</span>
+</td></tr>
+</table>
+</td></tr>
+<tr><td><span style="">Use the </span>
+<span style="color:#EE1100">down key</span>
+<span style=""> to go through all the slides of this group.</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_down.png" />
+</td></tr>
+</table>
+
+</section>
+
+<section>
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Using external data sources</h3>
+</td></tr>
+<tr><td><span style="">The </span>
+<span style="color:#EE1100">Table</span>
+<span style=""> tag is used to generate a data table from a CSV file.</span>
+</td></tr>
+<tr><td>The example below comes from a CSV file providen with this slideshow.
+</td></tr>
+<tr><td><table>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+</table>
+</td></tr>
+<tr><td><span style="">Use the </span>
+<span style="color:#EE1100">right key</span>
+<span style=""> to continue to the next group</span>
+</td></tr>
+<tr><td><img src="img/red_arrow_right.png" />
+</td></tr>
+</table>
+
+</section>
+
+</section>
+<section data-background="#440000">
+<table cellpadding="0" border="0" cellspacing="0">
+<tr><td><h3>Finally</h3>
+</td></tr>
+<tr><td>We recommand you to consult the complete documentation of SlideMaker.
+</td></tr>
+<tr><td>You can also test the providen examples, and read the source code for better understanding.
+</td></tr>
+<tr><td><h3>Thank you !</h3>
+</td></tr>
+</table>
+
+</section>
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+            });
+
+        </script>
+    </body>
+</html>
